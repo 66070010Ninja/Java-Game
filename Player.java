@@ -5,14 +5,31 @@ import java.awt.*;
 // Object Player
 public class Player {
     private Image Player;
-    private int position_x = 0, position_y = 0;
+    private Image Player_move;
+    private Image Player_shoot;
+    private Image Player_shoot_and_move;
+    private int position_x = 0, position_y = 500;
     private int speed = 10;
 
     public Player() {
         Player = new ImageIcon("Player/Player.png").getImage();
+        Player_move = new ImageIcon("Player/Sprite-0002-move.gif").getImage();
+        Player_shoot = new ImageIcon("Player/Sprite-0002-shoot.gif").getImage();
+        Player_shoot_and_move = new ImageIcon("Player/Sprite-0002-shootandmove.gif").getImage();
     }
+
+    // Getter
     public Image getPlayer() {
         return Player;
+    }
+    public Image getPlayer_Move() {
+        return Player_move;
+    }
+    public Image getPlayer_Shoot() {
+        return Player_shoot;
+    }
+    public Image getPlayer_Shoot_and_Move() {
+        return  Player_shoot_and_move;
     }
     public int getPosition_X() {
         return position_x;

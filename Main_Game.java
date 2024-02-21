@@ -30,22 +30,33 @@ public class Main_Game extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         Graphics g2D = (Graphics2D) g;
         g2D.drawImage(bg.getBlackguard(), 0, 0, null);
-        g2D.drawImage(player.getPlayer(), player.getPosition_X(), player.getPosition_Y(), null);
+        if ((keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) && keyH.attackPressed == true) {
+            g2D.drawImage(player.getPlayer_Shoot_and_Move(), player.getPosition_X(), player.getPosition_Y(), null);
+        }
+        else if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+            g2D.drawImage(player.getPlayer_Move(), player.getPosition_X(), player.getPosition_Y(), null);
+        }
+        else if (keyH.attackPressed == true) {
+            g2D.drawImage(player.getPlayer_Shoot(), player.getPosition_X(), player.getPosition_Y(), null);
+        }
+        else {
+            g2D.drawImage(player.getPlayer(), player.getPosition_X(), player.getPosition_Y(), null);
+        }
     }
 
-    // draw and update
+    // Draw and Update
     @Override
     public void actionPerformed(ActionEvent e) {
         update();
         repaint();
     }
 
-    // contro Player
+    // Contro Player
     public void update() {
-        if (keyH.upPressed == true && player.getPosition_Y() >= 0) {
+        if (keyH.upPressed == true && player.getPosition_Y() >= 500) {
             player.setPostion_Y(player.getPosition_Y() - player.getSpeed());
         }
-        if (keyH.downPressed == true && player.getPosition_Y() <= height - player.getHeight()) {
+        if (keyH.downPressed == true && player.getPosition_Y() <= height - player.getHeight()*2) {
             player.setPostion_Y(player.getPosition_Y() + player.getSpeed());
         }
         if (keyH.leftPressed == true && player.getPosition_X() >= 0) {
