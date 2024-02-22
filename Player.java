@@ -12,6 +12,7 @@ public class Player implements KeyListener {
     private int position_x = 0, position_y = 500;
     private int speed = 10;
 
+    // Player
     public Player() {
         Player = new ImageIcon("Player/Player.png").getImage();
         Player_move = new ImageIcon("Player/Sprite-0002-move.gif").getImage();
@@ -38,12 +39,6 @@ public class Player implements KeyListener {
     public int getPosition_Y() {
         return position_y;
     }
-    public void setPostion_X(int x) {
-        position_x = x;
-    }
-    public void setPostion_Y(int y) {
-        position_y = y;
-    }
     public int getWidth() {
         return Player.getWidth(null);
     }
@@ -54,15 +49,23 @@ public class Player implements KeyListener {
         return speed;
     }
 
+    // Setter
+    public void setPostion_X(int x) {
+        position_x = x;
+    }
+    public void setPostion_Y(int y) {
+        position_y = y;
+    }
+
     // Get Key Player
     public boolean upPressed, downPressed, leftPressed, rightPressed, attackPressed;
 
     @Override
     public void keyTyped(KeyEvent e) {}
+
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-
         if (code == KeyEvent.VK_UP) {
             upPressed = true;
         }
@@ -79,10 +82,10 @@ public class Player implements KeyListener {
             attackPressed = true;
         }
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-
         if (code == KeyEvent.VK_UP) {
             upPressed = false;
         }

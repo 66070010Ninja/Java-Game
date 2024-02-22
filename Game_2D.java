@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Game_2D extends JFrame {
     public int width = 1920, height = 1080;
 
+    // Game 2D
     public Game_2D() {
         setTitle("Game 2D");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -17,6 +18,7 @@ public class Game_2D extends JFrame {
         setVisible(true);
     }
 
+    // Test Run
     public static void main(String[] args) {
         new Game_2D();
     }

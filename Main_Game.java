@@ -1,6 +1,5 @@
 // Import
 import javax.swing.*;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.*;
@@ -12,18 +11,19 @@ public class Main_Game extends JPanel implements ActionListener {
     private Blackguard bg;
     private Player player;
 
+    // Main Game
     public Main_Game() {
-        setOpaque(false);
         bg = new Blackguard();
         player = new Player();
-        addKeyListener(player);
-        setFocusable(true);
-
-        setSize(width, height);
         timer = new Timer(1, this);
         timer.start();
+        setOpaque(false);
+        setFocusable(true);
+        setSize(width, height);
+        addKeyListener(player);
     }
 
+    // Paint
     public void paint(Graphics g) {
         Graphics g2D = (Graphics2D) g;
         g2D.drawImage(bg.getBlackguard(), 0, 0, null);
