@@ -1,9 +1,10 @@
 // Import
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 // Object Player
-public class Player {
+public class Player implements KeyListener {
     private Image Player;
     private Image Player_move;
     private Image Player_shoot;
@@ -51,5 +52,51 @@ public class Player {
     }
     public int getSpeed() {
         return speed;
+    }
+
+    // Get Key Player
+    public boolean upPressed, downPressed, leftPressed, rightPressed, attackPressed;
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+
+        if (code == KeyEvent.VK_UP) {
+            upPressed = true;
+        }
+        else if (code == KeyEvent.VK_DOWN) {
+            downPressed = true;
+        }
+        else if (code == KeyEvent.VK_LEFT) {
+            leftPressed = true;
+        }
+        else if (code == KeyEvent.VK_RIGHT) {
+            rightPressed = true;
+        }
+        else if (code == KeyEvent.VK_0) {
+            attackPressed = true;
+        }
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int code = e.getKeyCode();
+
+        if (code == KeyEvent.VK_UP) {
+            upPressed = false;
+        }
+        else if (code == KeyEvent.VK_DOWN) {
+            downPressed = false;
+        }
+        else if (code == KeyEvent.VK_LEFT) {
+            leftPressed = false;
+        }
+        else if (code == KeyEvent.VK_RIGHT) {
+            rightPressed = false;
+        }
+        else if (code == KeyEvent.VK_0) {
+            attackPressed = false;
+        }
     }
 }

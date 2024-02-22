@@ -1,4 +1,3 @@
-
 // Import
 import javax.swing.*;
 
@@ -12,14 +11,12 @@ public class Main_Game extends JPanel implements ActionListener {
     private Timer timer;
     private Blackguard bg;
     private Player player;
-    private KeyHandler keyH;
 
     public Main_Game() {
         setOpaque(false);
         bg = new Blackguard();
         player = new Player();
-        keyH = new KeyHandler();
-        addKeyListener(keyH);
+        addKeyListener(player);
         setFocusable(true);
 
         setSize(width, height);
@@ -30,13 +27,13 @@ public class Main_Game extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         Graphics g2D = (Graphics2D) g;
         g2D.drawImage(bg.getBlackguard(), 0, 0, null);
-        if ((keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) && keyH.attackPressed == true) {
+        if ((player.upPressed == true || player.downPressed == true || player.leftPressed == true || player.rightPressed == true) && player.attackPressed == true) {
             g2D.drawImage(player.getPlayer_Shoot_and_Move(), player.getPosition_X(), player.getPosition_Y(), null);
         }
-        else if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+        else if (player.upPressed == true || player.downPressed == true || player.leftPressed == true || player.rightPressed == true) {
             g2D.drawImage(player.getPlayer_Move(), player.getPosition_X(), player.getPosition_Y(), null);
         }
-        else if (keyH.attackPressed == true) {
+        else if (player.attackPressed == true) {
             g2D.drawImage(player.getPlayer_Shoot(), player.getPosition_X(), player.getPosition_Y(), null);
         }
         else {
@@ -53,16 +50,16 @@ public class Main_Game extends JPanel implements ActionListener {
 
     // Contro Player
     public void update() {
-        if (keyH.upPressed == true && player.getPosition_Y() >= 500) {
+        if (player.upPressed == true && player.getPosition_Y() >= 500) {
             player.setPostion_Y(player.getPosition_Y() - player.getSpeed());
         }
-        if (keyH.downPressed == true && player.getPosition_Y() <= height - player.getHeight()*2) {
+        if (player.downPressed == true && player.getPosition_Y() <= height - player.getHeight()*2) {
             player.setPostion_Y(player.getPosition_Y() + player.getSpeed());
         }
-        if (keyH.leftPressed == true && player.getPosition_X() >= 0) {
+        if (player.leftPressed == true && player.getPosition_X() >= 0) {
             player.setPostion_X(player.getPosition_X() - player.getSpeed());
         }
-        if (keyH.rightPressed == true && player.getPosition_X() <= width - player.getWidth()){
+        if (player.rightPressed == true && player.getPosition_X() <= width - player.getWidth()){
             player.setPostion_X(player.getPosition_X() + player.getSpeed());
         }
     }
