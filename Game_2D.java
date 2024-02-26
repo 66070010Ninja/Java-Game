@@ -1,9 +1,10 @@
+
 // Import
 import javax.swing.*;
 
 // JFrame Game_2D
 public class Game_2D extends JFrame {
-    public int width = 1920, height = 1080;
+    private int width = 1920, height = 1080;
 
     // Game 2D
     public Game_2D() {
