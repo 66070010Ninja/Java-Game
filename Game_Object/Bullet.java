@@ -15,7 +15,7 @@ public class Bullet {
     private final Area bulletShap;
 
     public Bullet(double x, double y) {
-        this.image = new ImageIcon(getClass().getResource("/Img/Bullet/Player/Bullet.gif")).getImage();
+        this.image = new ImageIcon(getClass().getResource("/Bullet/Player/Bullet.gif")).getImage();
         this.x = x;
         this.y = y;
         Path2D p = new Path2D.Double();
