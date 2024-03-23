@@ -15,7 +15,7 @@ public class Enemy {
     private final Area enemyShap;
 
     public Enemy() {
-        image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy-01.png")).getImage();
+        image = new ImageIcon(getClass().getResource("/Enemy/Enemy-01.png")).getImage();
         Path2D p = new Path2D.Double();
         p.moveTo(0, 0);
         p.lineTo(0, getHeight());
