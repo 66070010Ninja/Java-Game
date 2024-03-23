@@ -15,7 +15,7 @@ public class Player {
     private final Area playerShap;
 
     public Player() {
-        image = new ImageIcon(getClass().getResource("/Img/Player/Still/Player_still.png")).getImage();
+        image = new ImageIcon(getClass().getResource("/Player/Still/Player_still.png")).getImage();
         Path2D p = new Path2D.Double();
         p.moveTo(0, 0);
         p.lineTo(0, getHeight());
