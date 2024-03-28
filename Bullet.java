@@ -13,16 +13,30 @@ public class Bullet extends Object {
             setImage(database.getBullet_Player_Image());
             setArea();
             setSpeed(database.getBullet_Player_Speed());
+            setAttack(database.get_Player_Attack());
         }
         else if (object instanceof Enemy_01) {
             setImage(database.getBullet_Enemy_01_Image());
             setArea();
             setSpeed(database.getBullet_Enemy_01_Speed());
+            setAttack(database.get_Enemy_01_Attack());
         }
         else if (object instanceof Enemy_03) {
             setImage(database.getBullet_Enemy_03_Image());
             setArea();
             setSpeed(database.getBullet_Enemy_03_Speed());
+            setAttack(database.get_Enemy_01_Attack());
+        }
+        else if (object instanceof Enemy_04) {
+            setImage(database.getBullet_Enemy_04_Image());
+            setArea();
+            setAttack(database.get_Enemy_04_Attack());
+        }
+        else if (object instanceof Enemy_05) {
+            setImage(database.getBullet_Enemy_05_Image());
+            setArea();
+            setSpeed(database.getBullet_Enemy_05_Speed());
+            setAttack(database.get_Enemy_05_Attack());
         }
     }
 
@@ -58,5 +72,10 @@ public class Bullet extends Object {
             setX(getX() - getSpeed());
             setY(getY() - getSpeed()/3);
         }
+        else if (object instanceof Enemy_05 && type_bullet == 0) {
+            setX(getX() - getSpeed());
+            setY(getY() + getSpeed()/2);
+        }
     }
+
 }

@@ -7,9 +7,11 @@ public class List_Bullet {
     private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     private int count_reload_bullet = 0;
     private Thread thread;
-    private Player player;
-    private Enemy_01 enemy_01;
-    private Enemy_03 enemy_03;
+    private Player player = null;
+    private Enemy_01 enemy_01 = null;
+    private Enemy_03 enemy_03 = null;
+    private Enemy_04 enemy_04 = null;
+    private Enemy_05 enemy_05 = null;
 
     public List_Bullet(Object object) {
         if (object instanceof Player) {
@@ -21,21 +23,50 @@ public class List_Bullet {
         else if (object instanceof Enemy_03) {
             enemy_03 = (Enemy_03)object;
         }
+        else if (object instanceof Enemy_04) {
+            enemy_04 = (Enemy_04)object;
+        }
+        else if (object instanceof Enemy_05) {
+            enemy_05 = (Enemy_05)object;
+        }
         thread = new Thread(new Runnable() {
             public void run() {
                 while (database.getStart()) {
-                    if (database.getPlayer_Reload_Bullet() == count_reload_bullet && object instanceof Player) {
+                    if (database.getPlayer_Reload_Bullet() <= count_reload_bullet && player != null) {
                         bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 0));
                         count_reload_bullet = 0;
                     }
-                    else if (database.getEnemy_01_Reload_Bullet() == count_reload_bullet && object instanceof Enemy_01 && object.getImage() != database.getNull_Image()) {
-                        bullets.add(new Bullet(enemy_01.getX()+25, enemy_01.getY()+25, enemy_01, 0));
+                    else if (database.getEnemy_01_Reload_Bullet() <= count_reload_bullet && enemy_01 != null && object.getImage() != database.getNull_Image() && object.getImage() != database.getDead_Image()) {
+                        bullets.add(new Bullet(enemy_01.getX()+10, enemy_01.getY()+45, enemy_01, 0));
                         count_reload_bullet = 0;
                     }
-                    else if (database.getEnemy_03_Reload_Bullet() == count_reload_bullet && object instanceof Enemy_03 && object.getImage() != database.getNull_Image()) {
-                        bullets.add(new Bullet(enemy_03.getX()+25, enemy_03.getY()+25, enemy_03, 1));
-                        bullets.add(new Bullet(enemy_03.getX()+25, enemy_03.getY()+25, enemy_03, 2));
-                        bullets.add(new Bullet(enemy_03.getX()+25, enemy_03.getY()+25, enemy_03, 3));
+                    else if (database.getEnemy_03_Reload_Bullet() <= count_reload_bullet && enemy_03 != null && object.getImage() != database.getNull_Image() && object.getImage() != database.getDead_Image()) {
+                        bullets.add(new Bullet(enemy_03.getX()+10, enemy_03.getY() + enemy_03.getHeight()/2 - 10, enemy_03, 1));
+                        bullets.add(new Bullet(enemy_03.getX()+10, enemy_03.getY() + enemy_03.getHeight()/2 - 10, enemy_03, 2));
+                        bullets.add(new Bullet(enemy_03.getX()+10, enemy_03.getY() + enemy_03.getHeight()/2 - 10, enemy_03, 3));
+                        count_reload_bullet = 0;
+                    }
+                    else if (database.getEnemy_04_Reload_Bullet() <= count_reload_bullet && enemy_04 != null && object.getImage() != database.getNull_Image() && object.getImage() != database.getDead_Image()) {
+                        if (bullets.size() == 0 && !enemy_04.getAttack()) {
+                            bullets.add(new Bullet(enemy_04.getX() - 1900, enemy_04.getY() + enemy_04.getHeight() - 49, enemy_04, 0));
+                            enemy_04.setAttack(true);
+                        }
+                        else if (bullets.size() == 1 && !enemy_04.getAttack()) {
+                            bullets.remove(0);
+                            enemy_04.setAttack(true);
+                        }
+                        count_reload_bullet = 0;
+                    }
+                    else if (enemy_04 != null && object.getImage() != database.getNull_Image()) {
+                        if (enemy_04.getAttack() && count_reload_bullet == database.getTime_Attack()) {
+                            enemy_04.setAttack(false);
+                        }
+                    }
+                    else if (enemy_04 != null && object.getImage() == database.getNull_Image() && bullets.size() != 0) {
+                        bullets.remove(0);
+                    }
+                    else if (database.getEnemy_05_Reload_Bullet() <= count_reload_bullet && enemy_05 != null && object.getImage() != database.getNull_Image()) {
+                        bullets.add(new Bullet(enemy_05.getX()+30, enemy_05.getY() + enemy_05.getHeight(), enemy_05, 0));
                         count_reload_bullet = 0;
                     }
                     count_reload_bullet++;

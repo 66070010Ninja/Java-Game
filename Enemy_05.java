@@ -1,20 +1,19 @@
 
-public class Enemy_01 extends Object implements Check {
+public class Enemy_05 extends Object implements Check {
     private DataBase database = new DataBase();
     private List_Bullet bullets;
 
-    public Enemy_01() {
-        setImage(database.getEnemy_01_Image());
+    public Enemy_05() {
+        setImage(database.getEnemy_05_Image());
         setArea();
-        setSpeed(database.getEnemy_01_Speed());
+        setSpeed(database.getEnemy_05_Speed());
         bullets = new List_Bullet(this);
         setListBullets(bullets);
-        setHP(database.getEnemy_01_HP());
-        setHP_Image(database.getHP_Image());
-        setMax_HP_Image(database.getMax_HP_Image(), database.getEnemy_01_HP());
+        setHP(database.getEnemy_05_HP());setHP_Image(database.getHP_Image());
+        setMax_HP_Image(database.getMax_HP_Image(), database.getEnemy_05_HP());
         setCount_Dead(database.getCount_Dead());
     }
-
+    
     public boolean check() {
         if (getX() < -(int)getWidth() || getX() > (int)database.getScreen().getWidth()) {
             return false;
@@ -27,5 +26,9 @@ public class Enemy_01 extends Object implements Check {
     @Override
     public void update() {
         setX(getX() - getSpeed());
+    }
+
+    public void getDamage(Object object) {
+        
     }
 }

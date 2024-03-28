@@ -12,8 +12,6 @@ public class Player extends Object {
         setHP(database.getPlayer_HP());
     }
 
-    public void getDamage(Object object) {}
-
     @Override
     public void update() {}
 }

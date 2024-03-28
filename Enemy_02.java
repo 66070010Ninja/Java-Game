@@ -1,5 +1,5 @@
 
-public class Enemy_02 extends Object {
+public class Enemy_02 extends Object implements Check {
     private DataBase database = new DataBase();
     private boolean turn_back = false;
 
@@ -8,6 +8,9 @@ public class Enemy_02 extends Object {
         setArea();
         setSpeed(database.getEnemy_02_Speed());
         setHP(database.getEnemy_02_HP());
+        setHP_Image(database.getHP_Image());
+        setMax_HP_Image(database.getMax_HP_Image(), database.getEnemy_02_HP());
+        setCount_Dead(database.getCount_Dead());
     }
 
     public boolean check() {
@@ -27,11 +30,17 @@ public class Enemy_02 extends Object {
         else {
             setX(getX() + getSpeed());
         }
-        if (getX() < -(int)getWidth()) {
+        if (getX() < -(int)getWidth() && turn_back == false && getImage() != database.getNull_Image()) {
             turn_back = true;
+            setImage(database.getEnemy_02_Turn_Back_Image());
         }
-        else if (getX() > (int)database.getScreen().getWidth()) {
+        else if (getX() > (int)database.getScreen().getWidth() && turn_back == true && getImage() != database.getNull_Image()) {
             turn_back = false;
+            setImage(database.getEnemy_02_Image());
         }
+    }
+
+    public void getDamage(Object object) {
+        
     }
 }

@@ -6,20 +6,25 @@ public abstract class Object {
     private double x;
     private double y;
     private int hp;
+    private int max_hp;
+    private int attack;
     private float speed;
     private Image image;
+    private Image hp_image;
+    private Image max_hp_image;
     private List_Bullet bullets = null;
     private Area area;
     private Path2D path2D = new Path2D.Double();
+    private int count_dead;
 
     public void draw(Graphics2D g2D, Color color) {
-        AffineTransform oldTransform = g2D.getTransform();
-        g2D.translate(getX(), getY());
-        AffineTransform tran = new AffineTransform();
 
-        g2D.drawImage(getImage(), tran, null);
+        g2D.drawImage(getImage(), (int)getX(), (int)getY(), null);
 
-        g2D.setTransform(oldTransform);
+        if ((this instanceof Enemy_01 || this instanceof Enemy_02 || this instanceof Enemy_03 || this instanceof Enemy_04 || this instanceof Enemy_05) && get_HP() > 0) {
+            g2D.drawImage(getMax_HP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
+            g2D.drawImage(getHP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
+        }
 
         if (bullets != null) {
             bullets.draw(g2D, color);
@@ -32,6 +37,12 @@ public abstract class Object {
         }
     }
 
+    public void setCount_Dead(int count_dead) {
+        this.count_dead = count_dead;
+    }
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
     public void setHP(int hp) {
         this.hp = hp;
     }
@@ -40,6 +51,19 @@ public abstract class Object {
     }
     public void setImage(Image image) {
         this.image = image;
+    }
+    public void setHP_Image(Image hp_Image) {
+        hp_image = hp_Image.getScaledInstance((int)getWidth(), (int)hp_Image.getHeight(null), Image.SCALE_SMOOTH);
+    }
+    public void setHP_Image() {
+        int true_hp = (int)((double)get_HP()/(double)get_Max_HP()*(double)getWidth());
+        if (true_hp > 0) {
+            hp_image = hp_image.getScaledInstance(true_hp, (int)hp_image.getHeight(null), Image.SCALE_SMOOTH);
+        }
+    }
+    public void setMax_HP_Image(Image max_Image, int max_hp) {
+        max_hp_image = max_Image.getScaledInstance((int)getWidth(), (int)max_Image.getHeight(null), Image.SCALE_SMOOTH);
+        this.max_hp = max_hp;
     }
     public void setArea() {
         path2D.moveTo(0, 0);
@@ -65,8 +89,17 @@ public abstract class Object {
     public List_Bullet getList_Bullet() {
         return bullets;
     }
+    public int getCount_Dead() {
+        return count_dead;
+    }
     public int get_HP() {
         return hp;
+    }
+    public int get_Max_HP() {
+        return max_hp;
+    }
+    public int getAttack_to_HP() {
+        return attack;
     }
     public double getX() {
         return x;
@@ -79,6 +112,12 @@ public abstract class Object {
     }
     public Image getImage() {
         return image;
+    }
+    public Image getHP_Image() {
+        return hp_image;
+    }
+    public Image getMax_HP_Image() {
+        return max_hp_image;
     }
     public double getWidth() {
         return image.getWidth(null);
@@ -93,6 +132,11 @@ public abstract class Object {
         AffineTransform afx = new AffineTransform();
         afx.translate(getX(), getY());
         return new Area(afx.createTransformedShape(getArea()));
+    }
+
+    public void getDamage(int damage) {
+        setHP(get_HP() - damage);
+        setHP_Image();
     }
 
     public abstract void update();

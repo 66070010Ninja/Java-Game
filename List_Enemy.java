@@ -42,6 +42,15 @@ public class List_Enemy {
         y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_03.getHeight());
         enemy_03.changeLocation((int)database.getScreen().getWidth(), y);
         enemis.add(enemy_03);
+
+        Enemy_04 enemy_04 = new Enemy_04();
+        y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_04.getHeight());
+        enemy_04.changeLocation((int)database.getScreen().getWidth(), y);
+        enemis.add(enemy_04);
+
+        Enemy_05 enemy_05 = new Enemy_05();
+        enemy_05.changeLocation((int)database.getScreen().getWidth(), 0);
+        enemis.add(enemy_05);
     }
 
     public void draw(Graphics2D g2D, Color color) {
@@ -67,6 +76,20 @@ public class List_Enemy {
                     enemy.update();
                 }
             }
+            else if (enemis.get(i) instanceof Enemy_04) {
+                Enemy_04 enemy = (Enemy_04)enemis.get(i);
+                if (enemy != null) {
+                    enemy.draw(g2D, color);
+                    enemy.update();
+                }
+            }
+            else if (enemis.get(i) instanceof Enemy_05) {
+                Enemy_05 enemy = (Enemy_05)enemis.get(i);
+                if (enemy != null) {
+                    enemy.draw(g2D, color);
+                    enemy.update();
+                }
+            }
             update();
         }
     }
@@ -87,6 +110,18 @@ public class List_Enemy {
             }
             else if (enemis.get(i) instanceof Enemy_03) {
                 Enemy_03 enemy = (Enemy_03)enemis.get(i);
+                if (enemy != null && !enemy.check()) {
+                    enemis.remove(enemy);
+                }
+            }
+            else if (enemis.get(i) instanceof Enemy_04) {
+                Enemy_04 enemy = (Enemy_04)enemis.get(i);
+                if (enemy != null && !enemy.check()) {
+                    enemis.remove(enemy);
+                }
+            }
+            else if (enemis.get(i) instanceof Enemy_05) {
+                Enemy_05 enemy = (Enemy_05)enemis.get(i);
                 if (enemy != null && !enemy.check()) {
                     enemis.remove(enemy);
                 }
