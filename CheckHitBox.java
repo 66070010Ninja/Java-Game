@@ -48,12 +48,13 @@ public class CheckHitBox {
                 Bullet bullet = bullets.getBullets().get(i);
                 area = new Area(bullet.getShape());
                 area.intersect(enemy.getShape());
-                if (!area.isEmpty()) {
+                if (!area.isEmpty() && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image())) {
                     enemy.getDamage(bullet.getAttack_to_HP());
                     bullets.getBullets().remove(bullet);
                 }
-                if (enemy.get_HP() <= 0) {
+                if (enemy.get_HP() <= 0 && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image())) {
                     enemy.setImage(database.getDead_Image());
+                    player.setEnemy_Left(player.getEnemy_Left() -1);
                 }
                 if (player.get_HP() <= 0) {
                     player.setImage(database.getDead_Image());
@@ -76,10 +77,11 @@ public class CheckHitBox {
 
             area = new Area(player.getShape());
             area.intersect(enemy.getShape());
-            if (!area.isEmpty() && enemy.getImage() != database.getNull_Image() && enemy.getImage() != database.getDead_Image()) {
+            if (!area.isEmpty() && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image()) && player.getGolden_Time() <= 0) {
                 enemy.setImage(database.getDead_Image());
                 enemy.setHP(0);
                 player.getDamage(enemy.getAttack_to_HP());
+                player.setEnemy_Left(player.getEnemy_Left() -1);
             }
         }
 

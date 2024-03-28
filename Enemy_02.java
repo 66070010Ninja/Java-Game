@@ -2,6 +2,7 @@
 public class Enemy_02 extends Object implements Check {
     private DataBase database = new DataBase();
     private boolean turn_back = false;
+    private int round = 1;
 
     public Enemy_02() {
         setImage(database.getEnemy_02_Image());
@@ -31,13 +32,17 @@ public class Enemy_02 extends Object implements Check {
         else {
             setX(getX() + getSpeed());
         }
-        if (getX() < -(int)getWidth() && turn_back == false && getImage() != database.getNull_Image()) {
+        if (getX() < -(int)getWidth() && turn_back == false && getImage() != database.getNull_Image() && round != 0) {
             turn_back = true;
             setImage(database.getEnemy_02_Turn_Back_Image());
+            round--;
         }
         else if (getX() > (int)database.getScreen().getWidth() && turn_back == true && getImage() != database.getNull_Image()) {
             turn_back = false;
             setImage(database.getEnemy_02_Image());
+        }
+        else if (getX() < -(int)getWidth() && turn_back == false && getImage() != database.getNull_Image()) {
+            setImage(database.getNull_Image());
         }
     }
 }

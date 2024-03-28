@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public abstract class Object {
+
     private DataBase database = new DataBase();
     private double x;
     private double y;
@@ -18,6 +19,7 @@ public abstract class Object {
     private Path2D path2D = new Path2D.Double();
     private int count_dead;
     private int count_golden_time = 0;
+    private int enemy_left;
 
     public void draw(Graphics2D g2D, Color color) {
 
@@ -40,6 +42,12 @@ public abstract class Object {
                 }
                 count_hp --;
             }
+            g2D.setFont(new Font("Times", Font.PLAIN, (int)getHP_Image().getHeight(null)/2));
+            g2D.drawString("Enemy Left : " + getEnemy_Left(), 1600, 50);
+
+            if (get_HP() <= 0) {
+                g2D.drawString("Game Over", (int)database.getScreen().getWidth()/2, (int)database.getScreen().getHeight()/2);
+            }
         }
 
         if (bullets != null) {
@@ -53,6 +61,9 @@ public abstract class Object {
         }
     }
 
+    public void setEnemy_Left(int enemy_left) {
+        this.enemy_left = enemy_left;
+    }
     public void setCount_Dead(int count_dead) {
         this.count_dead = count_dead;
     }
@@ -119,6 +130,9 @@ public abstract class Object {
 
     public List_Bullet getList_Bullet() {
         return bullets;
+    }
+    public int getEnemy_Left() {
+        return enemy_left;
     }
     public int getCount_Dead() {
         return count_dead;

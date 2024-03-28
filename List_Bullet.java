@@ -32,7 +32,7 @@ public class List_Bullet {
         thread = new Thread(new Runnable() {
             public void run() {
                 while (database.getStart()) {
-                    if (database.getPlayer_Reload_Bullet() <= count_reload_bullet && player != null) {
+                    if (database.getPlayer_Reload_Bullet() <= count_reload_bullet && player != null && !player.getImage().equals(database.getNull_Image())) {
                         bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 0));
                         count_reload_bullet = 0;
                     }

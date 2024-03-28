@@ -29,12 +29,12 @@ public class DataBase {
     private final int player_hp = 100;
     private final float player_speed = 5f;
     private final int player_time_golden = 1000;
-    private int player_attack = 20;
+    private int player_attack = 50;
     private int reload_bullet = 100;
 
     // Bullet
     private final Image bullet_player_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player.gif")).getImage();
-    private final float bullet_player_speed = 5f;
+    private final float bullet_player_speed = 8f;
 
     // Enemy 01
     private final Image enemy_01_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_01.gif")).getImage();

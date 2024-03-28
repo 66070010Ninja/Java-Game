@@ -13,6 +13,7 @@ public class Player extends Object {
         setMax_HP_Image(database.getHP_Player_Null_Image(), database.getPlayer_HP());
         setCount_Dead(database.getCount_Dead());
         changeLocation(100, 100);
+        setEnemy_Left(50);
     }
 
     @Override
