@@ -62,8 +62,8 @@ public class RunGame extends JPanel{
         bg.draw(g2D, null);
     }
     public void drawGame() {
-        player.draw(g2D, Color.GREEN);
-        enemis.draw(g2D, Color.RED);
+        player.draw(g2D, null);
+        enemis.draw(g2D, null);
     }
 
     public void update() {

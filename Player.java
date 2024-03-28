@@ -9,7 +9,10 @@ public class Player extends Object {
         setSpeed(database.getPlayer_Speed());
         bullets = new List_Bullet(this);
         setListBullets(bullets);
-        setHP(database.getPlayer_HP());
+        setHP_Image(database.getHP_Player_Image());
+        setMax_HP_Image(database.getHP_Player_Null_Image(), database.getPlayer_HP());
+        setCount_Dead(database.getCount_Dead());
+        changeLocation(100, 100);
     }
 
     @Override

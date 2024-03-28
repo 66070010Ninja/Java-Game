@@ -51,19 +51,19 @@ public class List_Bullet {
                             bullets.add(new Bullet(enemy_04.getX() - 1900, enemy_04.getY() + enemy_04.getHeight() - 49, enemy_04, 0));
                             enemy_04.setAttack(true);
                         }
-                        else if (bullets.size() == 1 && !enemy_04.getAttack()) {
+                        else if (bullets.size() == 1 && enemy_04.getAttack()) {
                             bullets.remove(0);
-                            enemy_04.setAttack(true);
+                            enemy_04.setAttack(false);
                         }
                         count_reload_bullet = 0;
                     }
-                    else if (enemy_04 != null && object.getImage() != database.getNull_Image()) {
+                    else if (enemy_04 != null && (object.getImage() == database.getNull_Image() || object.getImage() == database.getDead_Image())) {
+                        if (bullets.size() > 0) {
+                            bullets.remove(0);
+                        }
                         if (enemy_04.getAttack() && count_reload_bullet == database.getTime_Attack()) {
                             enemy_04.setAttack(false);
                         }
-                    }
-                    else if (enemy_04 != null && object.getImage() == database.getNull_Image() && bullets.size() != 0) {
-                        bullets.remove(0);
                     }
                     else if (database.getEnemy_05_Reload_Bullet() <= count_reload_bullet && enemy_05 != null && object.getImage() != database.getNull_Image()) {
                         bullets.add(new Bullet(enemy_05.getX()+30, enemy_05.getY() + enemy_05.getHeight(), enemy_05, 0));

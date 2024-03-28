@@ -13,6 +13,7 @@ public class Enemy_01 extends Object implements Check {
         setHP_Image(database.getHP_Image());
         setMax_HP_Image(database.getMax_HP_Image(), database.getEnemy_01_HP());
         setCount_Dead(database.getCount_Dead());
+        setAttack(database.get_Enemy_01_Attack());
     }
 
     public boolean check() {

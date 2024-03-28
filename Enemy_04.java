@@ -14,6 +14,7 @@ public class Enemy_04 extends Object implements Check {
         setHP_Image(database.getHP_Image());
         setMax_HP_Image(database.getMax_HP_Image(), database.getEnemy_04_HP());
         setCount_Dead(database.getCount_Dead());
+        setAttack(database.get_Enemy_04_Attack());
     }
 
     public boolean check() {
@@ -40,9 +41,5 @@ public class Enemy_04 extends Object implements Check {
     }
     public boolean getAttack() {
         return attack;
-    }
-
-    public void getDamage(Object object) {
-        
     }
 }

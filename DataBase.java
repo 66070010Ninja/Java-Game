@@ -20,10 +20,15 @@ public class DataBase {
     private final Image Max_HP_Image = new ImageIcon(getClass().getResource("/Img/HP/HP_02.png")).getImage();
     private final Image HP_Image = new ImageIcon(getClass().getResource("/Img/HP/HP_01.png")).getImage();
 
+    // HP Player
+    private final Image player_HP_Image = new ImageIcon(getClass().getResource("/Img/HP/health-UI1.png")).getImage();
+    private final Image player_HP_Null_Image = new ImageIcon(getClass().getResource("/Img/HP/health-UI-heal1.png")).getImage();
+
     // Player
     private final Image player_Image = new ImageIcon(getClass().getResource("/Img/Player/Player.png")).getImage();
     private final int player_hp = 100;
     private final float player_speed = 5f;
+    private final int player_time_golden = 1000;
     private int player_attack = 20;
     private int reload_bullet = 100;
 
@@ -36,21 +41,21 @@ public class DataBase {
     private final int enemy_01_hp = 100;
     private final float enemy_01_speed = 3f;
     private final int enemy_01_reload_bullet = 200;
-    private final int enemy_01_attack = 10;
+    private final int enemy_01_attack = 20;
 
     // Enemy 02
     private final Image enemy_02_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_02.gif")).getImage();
     private final Image enemy_02_turn_back_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_02_Turn_Back.gif")).getImage();
     private final int enemy_02_hp = 100;
     private final float enemy_02_speed = 5f;
-    private final int enemy_02_attack = 10;
+    private final int enemy_02_attack = 20;
 
     // Enemy 03
     private final Image enemy_03_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_03.gif")).getImage();
     private final int enemy_03_hp = 100;
     private final float enemy_03_speed = 3f;
     private final int enemy_03_reload_bullet = 300;
-    private final int enemy_03_attack = 10;
+    private final int enemy_03_attack = 20;
 
     // Enemy 04
     private final Image enemy_04_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_04.gif")).getImage();
@@ -58,14 +63,14 @@ public class DataBase {
     private final float enemy_04_speed = 2f;
     private final int enemy_04_reload_bullet = 500;
     private final int time_attack = 100;
-    private final int enemy_04_attack = 10;
+    private final int enemy_04_attack = 20;
 
     // Enemy 05
     private final Image enemy_05_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_05.gif")).getImage();
     private final int enemy_05_hp = 100;
     private final float enemy_05_speed = 4f;
     private final int enemy_05_reload_bullet = 300;
-    private final int enemy_05_attack = 10;
+    private final int enemy_05_attack = 20;
 
     // Bullet Enemy 01
     private final Image bullet_enemy_01_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Enemy_01.gif")).getImage();
@@ -159,6 +164,12 @@ public class DataBase {
     public Image getHP_Image() {
         return HP_Image;
     }
+    public Image getHP_Player_Image() {
+        return player_HP_Image;
+    }
+    public Image getHP_Player_Null_Image() {
+        return player_HP_Null_Image;
+    }
 
     // HP
     public int getPlayer_HP() {
@@ -250,5 +261,8 @@ public class DataBase {
     }
     public int get_Enemy_05_Attack() {
         return enemy_05_attack;
+    }
+    public int getPlayer_Time_Golden() {
+        return player_time_golden;
     }
 }

@@ -12,6 +12,7 @@ public class Enemy_05 extends Object implements Check {
         setHP(database.getEnemy_05_HP());setHP_Image(database.getHP_Image());
         setMax_HP_Image(database.getMax_HP_Image(), database.getEnemy_05_HP());
         setCount_Dead(database.getCount_Dead());
+        setAttack(database.get_Enemy_05_Attack());
     }
     
     public boolean check() {
@@ -26,9 +27,5 @@ public class Enemy_05 extends Object implements Check {
     @Override
     public void update() {
         setX(getX() - getSpeed());
-    }
-
-    public void getDamage(Object object) {
-        
     }
 }

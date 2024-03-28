@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public abstract class Object {
+    private DataBase database = new DataBase();
     private double x;
     private double y;
     private int hp;
@@ -16,6 +17,7 @@ public abstract class Object {
     private Area area;
     private Path2D path2D = new Path2D.Double();
     private int count_dead;
+    private int count_golden_time = 0;
 
     public void draw(Graphics2D g2D, Color color) {
 
@@ -24,6 +26,20 @@ public abstract class Object {
         if ((this instanceof Enemy_01 || this instanceof Enemy_02 || this instanceof Enemy_03 || this instanceof Enemy_04 || this instanceof Enemy_05) && get_HP() > 0) {
             g2D.drawImage(getMax_HP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
             g2D.drawImage(getHP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
+        }
+
+        if (this instanceof Player) {
+            int count = 5;
+            int count_hp = get_HP()/20;
+            for (int i = 0; i < count; i++) {
+                if (count_hp > 0) {
+                    g2D.drawImage(getHP_Image(), 5 + i*getHP_Image().getWidth(null), 5, null);
+                }
+                else {
+                    g2D.drawImage(getMax_HP_Image(), 5 + i*getHP_Image().getWidth(null), 5, null);
+                }
+                count_hp --;
+            }
         }
 
         if (bullets != null) {
@@ -53,16 +69,28 @@ public abstract class Object {
         this.image = image;
     }
     public void setHP_Image(Image hp_Image) {
-        hp_image = hp_Image.getScaledInstance((int)getWidth(), (int)hp_Image.getHeight(null), Image.SCALE_SMOOTH);
+        if (this instanceof Player) {
+            hp_image = hp_Image.getScaledInstance(hp_Image.getWidth(null)/2, hp_Image.getHeight(null)/2, Image.SCALE_SMOOTH);;
+        }
+        else {
+            hp_image = hp_Image.getScaledInstance((int)getWidth(), (int)hp_Image.getHeight(null), Image.SCALE_SMOOTH);
+        }
     }
     public void setHP_Image() {
         int true_hp = (int)((double)get_HP()/(double)get_Max_HP()*(double)getWidth());
-        if (true_hp > 0) {
+        if (this instanceof Player) {}
+        else if (true_hp > 0) {
             hp_image = hp_image.getScaledInstance(true_hp, (int)hp_image.getHeight(null), Image.SCALE_SMOOTH);
         }
     }
     public void setMax_HP_Image(Image max_Image, int max_hp) {
-        max_hp_image = max_Image.getScaledInstance((int)getWidth(), (int)max_Image.getHeight(null), Image.SCALE_SMOOTH);
+        if (this instanceof Player) {
+            max_hp_image = max_Image.getScaledInstance(max_Image.getWidth(null)/2, max_Image.getHeight(null)/2, Image.SCALE_SMOOTH);
+            setHP(max_hp);
+        }
+        else {
+            max_hp_image = max_Image.getScaledInstance((int)getWidth(), (int)max_Image.getHeight(null), Image.SCALE_SMOOTH); 
+        }
         this.max_hp = max_hp;
     }
     public void setArea() {
@@ -71,6 +99,9 @@ public abstract class Object {
         path2D.lineTo(getWidth(), getHeight());
         path2D.lineTo(getWidth(), 0);
         area =  new Area(path2D);
+    }
+    public void setGolden_Time(int count_golden_time) {
+        this.count_golden_time = count_golden_time;
     }
     public void changeLocation(double x, double y) {
         this.x = x;
@@ -100,6 +131,9 @@ public abstract class Object {
     }
     public int getAttack_to_HP() {
         return attack;
+    }
+    public int getGolden_Time() {
+        return count_golden_time;
     }
     public double getX() {
         return x;
@@ -135,8 +169,18 @@ public abstract class Object {
     }
 
     public void getDamage(int damage) {
-        setHP(get_HP() - damage);
-        setHP_Image();
+        if (getGolden_Time() > 0 && this instanceof Player) {}
+        else if (getGolden_Time() == 0 && this instanceof Player) {
+            setHP(get_HP() - damage);
+            setGolden_Time(database.getCount_Dead());
+        }
+        else {
+            setHP(get_HP() - damage);
+        }
+
+        if (this instanceof Player != true) {
+            setHP_Image();
+        }
     }
 
     public abstract void update();

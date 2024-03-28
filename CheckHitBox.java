@@ -36,6 +36,9 @@ public class CheckHitBox {
                 checkhitbox(enemy_05);
             }
         }
+        if (player.getGolden_Time() != 0) {
+            player.setGolden_Time(player.getGolden_Time() - 1);
+        }
     }
 
     public void checkhitbox(Object enemy) {
@@ -52,19 +55,31 @@ public class CheckHitBox {
                 if (enemy.get_HP() <= 0) {
                     enemy.setImage(database.getDead_Image());
                 }
+                if (player.get_HP() <= 0) {
+                    player.setImage(database.getDead_Image());
+                }
+
                 if (enemy.getImage() == database.getDead_Image() && enemy.getCount_Dead() <= 0) {
                     enemy.setImage(database.getNull_Image());
                 }
                 else if (enemy.getImage() == database.getDead_Image()) {
                     enemy.setCount_Dead(enemy.getCount_Dead() - 1);
                 }
+
+                if (player.getImage() == database.getDead_Image() && player.getCount_Dead() <= 0) {
+                    player.setImage(database.getNull_Image());
+                }
+                else if (player.getImage() == database.getDead_Image()) {
+                    player.setCount_Dead(player.getCount_Dead() - 1);
+                }
             }
 
             area = new Area(player.getShape());
             area.intersect(enemy.getShape());
-            if (!area.isEmpty() && enemy.getImage() != database.getNull_Image()) {
+            if (!area.isEmpty() && enemy.getImage() != database.getNull_Image() && enemy.getImage() != database.getDead_Image()) {
                 enemy.setImage(database.getDead_Image());
                 enemy.setHP(0);
+                player.getDamage(enemy.getAttack_to_HP());
             }
         }
 
@@ -75,8 +90,10 @@ public class CheckHitBox {
                 area = new Area(bullet.getShape());
                 area.intersect(player.getShape());
                 if (!area.isEmpty() && enemy instanceof Enemy_04) {
+                    player.getDamage(bullet.getAttack_to_HP());
                 }
                 else if (!area.isEmpty()) {
+                    player.getDamage(bullet.getAttack_to_HP());
                     bullets.getBullets().remove(bullet);
                 }
             }
