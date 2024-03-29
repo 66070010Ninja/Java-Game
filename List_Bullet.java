@@ -33,7 +33,20 @@ public class List_Bullet {
             public void run() {
                 while (database.getStart()) {
                     if (database.getPlayer_Reload_Bullet() <= count_reload_bullet && player != null && !player.getImage().equals(database.getNull_Image())) {
-                        bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 0));
+                        if (player.getType_Bullet() == 1) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 0));
+                        }
+                        else if (player.getType_Bullet() == 2) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 1));
+                        }
+                        else if (player.getType_Bullet() == 3) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 2));
+                        }
+                        else if (player.getType_Bullet() == 4) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 3));
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 4));
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 5));
+                        }
                         count_reload_bullet = 0;
                     }
                     else if (database.getEnemy_01_Reload_Bullet() <= count_reload_bullet && enemy_01 != null && object.getImage() != database.getNull_Image() && object.getImage() != database.getDead_Image()) {

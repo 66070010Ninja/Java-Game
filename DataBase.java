@@ -10,6 +10,17 @@ public class DataBase {
     private final int target_time = (int)Math.pow(10, 9) / FPS;
     private final int count_dead = 100;
 
+    // Item
+    private final Image Item_DM2 = new ImageIcon(getClass().getResource("/Img/Item/Icon-DM2.png")).getImage();
+    private final Image Item_Explosion = new ImageIcon(getClass().getResource("/Img/Item/Icon-Explosion.png")).getImage();
+    private final Image Item_FR2 = new ImageIcon(getClass().getResource("/Img/Item/Icon-FR2.png")).getImage();
+    private final Image Item_Heal = new ImageIcon(getClass().getResource("/Img/Item/Icon-Heal.png")).getImage();
+    private final Image Item_Type_Bullet_01 = new ImageIcon(getClass().getResource("/Img/Item/Icon-Mmain.png")).getImage();
+    private final Image Item_Type_Bullet_02 = new ImageIcon(getClass().getResource("/Img/Item/Icon-RK.png")).getImage();
+    private final Image Item_Type_Bullet_03 = new ImageIcon(getClass().getResource("/Img/Item/Icon-RP.png")).getImage();
+    private final Image Item_Type_Bullet_04 = new ImageIcon(getClass().getResource("/Img/Item/Icon-SP.png")).getImage();
+    private final float Item_speed = 3f;
+
     // Null
     private final Image null_Image = new ImageIcon(getClass().getResource("/Img/Dead/Null.png")).getImage();
 
@@ -29,11 +40,21 @@ public class DataBase {
     private final int player_hp = 100;
     private final float player_speed = 5f;
     private final int player_time_golden = 1000;
+    private int type_bullet_player = 1;
     private int player_attack = 50;
     private int reload_bullet = 100;
 
+    // Icon
+    private final Image icon_bullet_type_01 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/Main-UI1.png")).getImage();
+    private final Image icon_bullet_type_02 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/Rocket-UI1.png")).getImage();
+    private final Image icon_bullet_type_03 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/RP-UI1.png")).getImage();
+    private final Image icon_bullet_type_04 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/SP-UI1.png")).getImage();
+
     // Bullet
-    private final Image bullet_player_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player.gif")).getImage();
+    private final Image bullet_player_Type_01_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player_Type_01.png")).getImage();
+    private final Image bullet_player_Type_02_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player_Type_02.gif")).getImage();
+    private final Image bullet_player_Type_03_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player_Type_03.gif")).getImage();
+    private final Image bullet_player_Type_04_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player_Type_04.png")).getImage();
     private final float bullet_player_speed = 8f;
 
     // Enemy 01
@@ -125,8 +146,17 @@ public class DataBase {
     public Image getPlayer_Image() {
         return player_Image;
     }
-    public Image getBullet_Player_Image() {
-        return bullet_player_Image;
+    public Image getBullet_Player_Type_01_Image() {
+        return bullet_player_Type_01_Image;
+    }
+    public Image getBullet_Player_Type_02_Image() {
+        return bullet_player_Type_02_Image;
+    }
+    public Image getBullet_Player_Type_03_Image() {
+        return bullet_player_Type_03_Image;
+    }
+    public Image getBullet_Player_Type_04_Image() {
+        return bullet_player_Type_04_Image;
     }
     public Image getEnemy_01_Image() {
         return enemy_01_Image;
@@ -169,6 +199,42 @@ public class DataBase {
     }
     public Image getHP_Player_Null_Image() {
         return player_HP_Null_Image;
+    }
+    public Image getIcon_Bullet_Type_01() {
+        return icon_bullet_type_01;
+    }
+    public Image getIcon_Bullet_Type_02() {
+        return icon_bullet_type_02;
+    }
+    public Image getIcon_Bullet_Type_03() {
+        return icon_bullet_type_03;
+    }
+    public Image getIcon_Bullet_Type_04() {
+        return icon_bullet_type_04;
+    }
+    public Image getItem_DM2_Image() {
+        return Item_DM2;
+    }
+    public Image getItem_Explosion_Image() {
+        return Item_Explosion;
+    }
+    public Image getItem_FR2_Image() {
+        return Item_FR2;
+    }
+    public Image getItem_Heal_Image() {
+        return Item_Heal;
+    }
+    public Image getItem_Type_Bullet_01_Image() {
+        return Item_Type_Bullet_01;
+    }
+    public Image getItem_Type_Bullet_02_Image() {
+        return Item_Type_Bullet_02;
+    }
+    public Image getItem_Type_Bullet_03_Image() {
+        return Item_Type_Bullet_03;
+    }
+    public Image getItem_Type_Bullet_04_Image() {
+        return Item_Type_Bullet_04;
     }
 
     // HP
@@ -222,6 +288,9 @@ public class DataBase {
     public float getBullet_Enemy_05_Speed() {
         return bullet_enemy_05_speed;
     }
+    public float getItem_Speed() {
+        return Item_speed;
+    }
 
     // Reload
     public int getPlayer_Reload_Bullet() {
@@ -264,5 +333,9 @@ public class DataBase {
     }
     public int getPlayer_Time_Golden() {
         return player_time_golden;
+    }
+
+    public int get_Type_Bullet() {
+        return type_bullet_player;
     }
 }

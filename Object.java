@@ -20,6 +20,7 @@ public abstract class Object {
     private int count_dead;
     private int count_golden_time = 0;
     private int enemy_left;
+    private int type_bullet;
 
     public void draw(Graphics2D g2D, Color color) {
 
@@ -29,8 +30,7 @@ public abstract class Object {
             g2D.drawImage(getMax_HP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
             g2D.drawImage(getHP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
         }
-
-        if (this instanceof Player) {
+        else if (this instanceof Player) {
             int count = 5;
             int count_hp = get_HP()/20;
             for (int i = 0; i < count; i++) {
@@ -48,7 +48,20 @@ public abstract class Object {
             if (get_HP() <= 0) {
                 g2D.drawString("Game Over", (int)database.getScreen().getWidth()/2, (int)database.getScreen().getHeight()/2);
             }
-        }
+
+            if (getType_Bullet() == 1) {
+                g2D.drawImage(database.getIcon_Bullet_Type_01() , 20, 960, 100, 100, null);
+            }
+            else if (getType_Bullet() == 2) {
+                g2D.drawImage(database.getIcon_Bullet_Type_02(), 20, 960, 100, 100, null);
+            }
+            else if (getType_Bullet() == 3) {
+                g2D.drawImage(database.getIcon_Bullet_Type_03(), 20, 960, 100, 100, null);
+            }
+            else if (getType_Bullet() == 4) {
+                g2D.drawImage(database.getIcon_Bullet_Type_04(), 20, 960, 100, 100, null);
+            }
+         }
 
         if (bullets != null) {
             bullets.draw(g2D, color);
@@ -61,6 +74,9 @@ public abstract class Object {
         }
     }
 
+    public void setType_Bullet(int type_bullet) {
+        this.type_bullet = type_bullet;
+    }
     public void setEnemy_Left(int enemy_left) {
         this.enemy_left = enemy_left;
     }
@@ -128,6 +144,9 @@ public abstract class Object {
         this.speed = speed;
     }
 
+    public int getType_Bullet() {
+        return type_bullet;
+    }
     public List_Bullet getList_Bullet() {
         return bullets;
     }

@@ -13,6 +13,7 @@ public class RunGame extends JPanel{
     private CheckHitBox checkhitbox;
     private Player player;
     private List_Enemy enemis;
+    private List_Item items;
 
     public RunGame() {
         image = new BufferedImage((int)database.getScreen().getWidth(), (int)database.getScreen().getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -51,7 +52,8 @@ public class RunGame extends JPanel{
         bg = new BackGround();
         player = new Player();
         enemis = new List_Enemy();
-        checkhitbox = new CheckHitBox(player, enemis);
+        items = new List_Item(player, enemis);
+        checkhitbox = new CheckHitBox(player, enemis, items);
     }
 
     public void initKeyboard() {
@@ -64,10 +66,15 @@ public class RunGame extends JPanel{
     public void drawGame() {
         player.draw(g2D, null);
         enemis.draw(g2D, null);
+        items.draw(g2D, null);
     }
 
     public void update() {
         checkhitbox.checkhitbox();
+        if (player.getEnemy_Left() <= 0) {
+            System.out.println("You Win !!!");
+            System.exit(0);
+        }
     }
 
     public void render() {

@@ -6,11 +6,13 @@ public class CheckHitBox {
     private Player player;
     private List_Enemy enemis;
     private List_Bullet bullets;
+    private List_Item items;
     private Area area;
 
-    public CheckHitBox(Player player, List_Enemy enemis) {
+    public CheckHitBox(Player player, List_Enemy enemis, List_Item items) {
         this.player = player;
         this.enemis = enemis;
+        this.items = items;
     }
 
     public void checkhitbox() {
@@ -49,8 +51,13 @@ public class CheckHitBox {
                 area = new Area(bullet.getShape());
                 area.intersect(enemy.getShape());
                 if (!area.isEmpty() && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image())) {
-                    enemy.getDamage(bullet.getAttack_to_HP());
-                    bullets.getBullets().remove(bullet);
+                    if (bullet.getType_Bullet() == 1 || bullet.getType_Bullet() == 3 || bullet.getType_Bullet() == 4) {
+                        enemy.getDamage(bullet.getAttack_to_HP());
+                        bullets.getBullets().remove(bullet);
+                    }
+                    else if (bullet.getType_Bullet() == 2) {
+                        enemy.getDamage(bullet.getAttack_to_HP());
+                    }
                 }
                 if (enemy.get_HP() <= 0 && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image())) {
                     enemy.setImage(database.getDead_Image());
@@ -98,6 +105,16 @@ public class CheckHitBox {
                     player.getDamage(bullet.getAttack_to_HP());
                     bullets.getBullets().remove(bullet);
                 }
+            }
+        }
+
+        for (int i = 0; i < items.getItems().size(); i++) {
+            Item item = items.getItems().get(i);
+            area = new Area(item.getShape());
+            area.intersect(player.getShape());
+            if (!area.isEmpty()) {
+                items.getItems().remove(item);
+                player.getItem(item);
             }
         }
     }

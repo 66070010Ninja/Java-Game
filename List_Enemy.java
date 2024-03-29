@@ -11,17 +11,18 @@ public class List_Enemy {
 
     public List_Enemy() {
         thread = new Thread(new Runnable() {
+            @Override
             public void run() {
                 while (database.getStart()) {
                     if (round <= 5) {
-                        Wave_11();
+                        Wave_01();
                     }
                     else if (round <= 10) {
-                        Wave_01();
+                        Wave_02();
                     }
                     else if (round > 10) {
                         Random random = new Random();
-                        int x = random.nextInt(0, 2);
+                        int x = random.nextInt(1, 3);
                         if (x == 1) {
                             Wave_02();
                         }
@@ -387,7 +388,7 @@ public class List_Enemy {
             }
         }
         round++;
-    }    
+    } 
 
     public void draw(Graphics2D g2D, Color color) {
         for (int i = 0; i < enemis.size(); i++) {
