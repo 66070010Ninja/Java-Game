@@ -4,6 +4,11 @@ public class Player extends Object {
     private List_Bullet bullets;
     private int reload_bullet;
     private int delay_change_bullet;
+    private int time_use_icon_DM2;
+    private int time_use_icon_FR2;
+    private boolean use_DM2 = false;
+    private boolean use_FR2 = false;
+    private boolean pause = false;
 
     public Player () {
         setImage(database.getPlayer_Image());
@@ -21,6 +26,59 @@ public class Player extends Object {
         }
     }
 
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
+    public boolean getPause() {
+        return pause;
+    }
+
+    public void setTime_Use_Icon_DM2(int time_use_icon_DM2) {
+        this.time_use_icon_DM2 = time_use_icon_DM2;
+        if (this.time_use_icon_DM2 <= 0) {
+            use_DM2 = false;
+        }
+        else {
+            use_DM2 = true;
+        }
+    }
+    public void setTime_Use_Icon_FR2(int time_use_icon_FR2) {
+        this.time_use_icon_FR2 = time_use_icon_FR2;
+        if (this.time_use_icon_FR2 <= 0) {
+            use_FR2 = false;
+
+            if (getType_Bullet() == 1) {
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_01());
+            }
+            else if (getType_Bullet() == 2) {
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_02());
+            }
+            else if (getType_Bullet() == 3) {
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_03());
+            }
+            else if (getType_Bullet() == 4) {
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_04());
+            }
+
+        }
+        else if (use_FR2 == false){
+            setReload_Bullet(getReload_Bullet()/2);
+            use_FR2 = true;
+        }
+    }
+    public int getTime_Use_DM2() {
+        return time_use_icon_DM2;
+    }
+    public int getTime_Use_FR2() {
+        return time_use_icon_FR2;
+    }
+    public boolean getUse_DM2() {
+        return use_DM2;
+    }
+    public boolean getUse_FR2() {
+        return use_FR2;
+    }
+
     public void setDelay_Change_Bullet(int delay_change_bullet) {
         this.delay_change_bullet = delay_change_bullet;
     }
@@ -34,11 +92,12 @@ public class Player extends Object {
     public void getItem(Item item) {
         switch (item.get_Type_Item()) {
             case 1:
-                setAttack(getAttack_to_HP()*2);
+                setTime_Use_Icon_DM2(database.getTime_Use_DM2());
                 break;
             case 2:
                 break;
             case 3:
+                setTime_Use_Icon_FR2(database.getTime_Use_FR2());
                 break;
             case 4:
                 if (get_HP()+20 > get_Max_HP()) {

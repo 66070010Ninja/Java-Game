@@ -12,7 +12,7 @@ public class Windows extends JFrame {
     private MouseInput mouse1 = new MouseInput();
 
     private MDI mdi = new MDI();
-    //private Menu_Draw d = new Menu_Draw();
+    // private Menu_Draw d = new Menu_Draw();
 
     public Windows() {
         setTitle("Ocean War 2077");
