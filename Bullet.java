@@ -85,14 +85,14 @@ public class Bullet extends Object {
         }
         else if (object instanceof Player && type_bullet == 3) {
             setX(getX() + getSpeed());
-            setY(getY() + getSpeed()/3);
+            setY(getY() - getSpeed()/3);
         }
         else if (object instanceof Player && type_bullet == 4) {
             setX(getX() + getSpeed());
         }
         else if (object instanceof Player && type_bullet == 5) {
             setX(getX() + getSpeed());
-            setY(getY() - getSpeed()/3);
+            setY(getY() + getSpeed()/3);
         }
         else if (object instanceof Enemy_01 && type_bullet == 0) {
             setX(getX() - getSpeed());

@@ -6,6 +6,7 @@ public class List_Item {
     private DataBase database = new DataBase();
     private ArrayList<Item> items = new ArrayList<Item>();
     private Thread thread;
+    private boolean drop = true;
     private int time = 1;
 
     public List_Item(Player player, List_Enemy enemis) {
@@ -15,9 +16,17 @@ public class List_Item {
                 while (database.getStart()) {
                     for (int i = 0; i < enemis.getList().size(); i++) {
                         Object object = enemis.getList().get(i);
-                        if ((player.getEnemy_Left()%5 == 0) && object.getImage().equals(database.getDead_Image()) && !(items.size() > 1)) {
-                            items.add(new Item(object));
+                        if (drop == false) {
+                            break;
                         }
+                        if ((player.getEnemy_Left()%5 == 0) && items.size() == 0 && object.getImage().equals(database.getDead_Image()) && drop) {
+                            items.add(new Item(object));
+                            drop = false;
+                            break;
+                        }
+                    }
+                    if (items.size() == 0) {
+                        drop = true;
                     }
                     try {
                         Thread.sleep(time);

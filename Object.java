@@ -31,7 +31,12 @@ public abstract class Object {
             setImage(database.getPlayer_Image());
         }
 
-        g2D.drawImage(getImage(), (int)getX(), (int)getY(), null);
+        if (this instanceof Victory) {
+            g2D.drawImage(getImage(), (int)database.getScreen().getWidth()/2 - getImage().getWidth(null)/2, (int)database.getScreen().getHeight()/2 - getImage().getHeight(null), null);
+        }
+        else {
+            g2D.drawImage(getImage(), (int)getX(), (int)getY(), null);
+        }
 
         if ((this instanceof Enemy_01 || this instanceof Enemy_02 || this instanceof Enemy_03 || this instanceof Enemy_04 || this instanceof Enemy_05) && get_HP() > 0) {
             g2D.drawImage(getMax_HP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
@@ -85,6 +90,21 @@ public abstract class Object {
                 g2D.drawImage(database.getIcon_Change_04_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
                 player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
             }
+
+            if (player.getUse_DM2() == true && player.getUse_FR2() == false) {
+                g2D.drawImage(database.getIcon_DM2(), 100, (int)database.getScreen().getHeight()-95, null);
+                player.setTime_Use_Icon_DM2(player.getTime_Use_DM2() - 1);
+            }
+            else if (player.getUse_DM2() == false && player.getUse_FR2() == true) {
+                g2D.drawImage(database.getIcon_FR2(), 100, (int)database.getScreen().getHeight()-95, null);
+                player.setTime_Use_Icon_FR2(player.getTime_Use_FR2() - 1);
+            }
+            else if (player.getUse_DM2() == true && player.getUse_FR2() == true) {
+                g2D.drawImage(database.getIcon_DM2(), 100, (int)database.getScreen().getHeight()-95, null);
+                g2D.drawImage(database.getIcon_FR2(), 200, (int)database.getScreen().getHeight()-95, null);
+                player.setTime_Use_Icon_DM2(player.getTime_Use_DM2() - 1);
+                player.setTime_Use_Icon_FR2(player.getTime_Use_FR2() - 1);
+            }
          }
 
         if (bullets != null) {
@@ -102,7 +122,9 @@ public abstract class Object {
         this.type_bullet = type_bullet;
     }
     public void setEnemy_Left(int enemy_left) {
-        this.enemy_left = enemy_left;
+        if (enemy_left >= 0) {
+            this.enemy_left = enemy_left;
+        }
     }
     public void setCount_Dead(int count_dead) {
         this.count_dead = count_dead;
