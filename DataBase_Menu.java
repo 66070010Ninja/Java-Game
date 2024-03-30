@@ -16,22 +16,22 @@ public class DataBase_Menu{
     };
 
     //BG
-    private final Image bg = new ImageIcon(getClass().getResource("/Img/Menu/title.png")).getImage();
-    private final Image bg_mode = new ImageIcon(getClass().getResource("/Img/Menu/Mode_select.png")).getImage();
+    private final Image bg = new ImageIcon(getClass().getResource("/Img/Back Ground/ocean war.png")).getImage();
+    private final Image bg_mode = new ImageIcon(getClass().getResource("/Img/Back Ground/mode_wall.png")).getImage();
 
     //Button
-    private final Image play = new ImageIcon(getClass().getResource("/Img/Menu/Play.png")).getImage().getScaledInstance((int)(1024 / 2), (int)(768 / 2), Image.SCALE_DEFAULT);
-    private final Image exit = new ImageIcon(getClass().getResource("/Img/Menu/Exit.png")).getImage().getScaledInstance((int)(1024 / 2.5), (int)(768 / 2.5), Image.SCALE_DEFAULT);
-    private final Image credit = new ImageIcon(getClass().getResource("Img/Menu/Credit.png")).getImage().getScaledInstance((int)(768 / 4), (int)(768 / 4), Image.SCALE_DEFAULT);
+    private final Image play = new ImageIcon(getClass().getResource("/Img/Menu/Play.png")).getImage().getScaledInstance((int)(1024 / 2), (int)(768 / 2), Image.SCALE_SMOOTH);
+    private final Image exit = new ImageIcon(getClass().getResource("/Img/Menu/Exit.png")).getImage().getScaledInstance((int)(1024 / 2.5), (int)(768 / 2.5), Image.SCALE_SMOOTH);
+    private final Image credit = new ImageIcon(getClass().getResource("Img/Menu/Credit.png")).getImage().getScaledInstance((int)(768 / 4), (int)(768 / 4), Image.SCALE_SMOOTH);
 
     //mode
     private final Image normal = new ImageIcon(getClass().getResource("/Img/Menu/NORMAL.png")).getImage();
     private final Image endless = new ImageIcon(getClass().getResource("/Img/Menu/ENDLESS.png")).getImage();
 
     //interact mouse
-    private final Image play_tp = new ImageIcon(getClass().getResource("/Img/Menu/Play_hovered.png")).getImage().getScaledInstance((int)(1024 / 2), (int)(768 / 2), Image.SCALE_DEFAULT);
-    private final Image exit_tp = new ImageIcon(getClass().getResource("/Img/Menu/Exit_hovered.png")).getImage().getScaledInstance((int)(1024 / 2.5), (int)(768 / 2.5), Image.SCALE_DEFAULT);
-    private final Image credit_tp = new ImageIcon(getClass().getResource("/Img/Menu/Credit_hovered.png")).getImage().getScaledInstance((int)(768 / 4), (int)(768 / 4), Image.SCALE_DEFAULT);
+    private final Image play_tp = new ImageIcon(getClass().getResource("/Img/Menu/Play_hovered.png")).getImage().getScaledInstance((int)(1024 / 2), (int)(768 / 2), Image.SCALE_SMOOTH);
+    private final Image exit_tp = new ImageIcon(getClass().getResource("/Img/Menu/Exit_hovered.png")).getImage().getScaledInstance((int)(1024 / 2.5), (int)(768 / 2.5), Image.SCALE_SMOOTH);
+    private final Image credit_tp = new ImageIcon(getClass().getResource("/Img/Menu/Credit_hovered.png")).getImage().getScaledInstance((int)(768 / 4), (int)(768 / 4), Image.SCALE_SMOOTH);
     private final Image normal_tp = new ImageIcon(getClass().getResource("/Img/Menu/NORMAL_hovered.png")).getImage();
     private final Image endless_tp = new ImageIcon(getClass().getResource("/Img/Menu/ENDLESS_hovered.png")).getImage();
 
