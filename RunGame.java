@@ -51,6 +51,7 @@ public class RunGame extends JPanel{
     public void initObjectGame() {
         bg = new BackGround();
         player = new Player();
+        player.setEnemy_Left(50);
         enemis = new List_Enemy();
         items = new List_Item(player, enemis);
         checkhitbox = new CheckHitBox(player, enemis, items);

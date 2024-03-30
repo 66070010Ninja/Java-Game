@@ -2,6 +2,8 @@
 public class Player extends Object {
     private DataBase database = new DataBase();
     private List_Bullet bullets;
+    private int reload_bullet;
+    private int delay_change_bullet;
 
     public Player () {
         setImage(database.getPlayer_Image());
@@ -13,8 +15,20 @@ public class Player extends Object {
         setMax_HP_Image(database.getHP_Player_Null_Image(), database.getPlayer_HP());
         setCount_Dead(database.getCount_Dead());
         changeLocation(100, 100);
-        setEnemy_Left(50);
         setType_Bullet(database.get_Type_Bullet());
+        if (getType_Bullet() == 1) {
+            setReload_Bullet(database.getPlayer_Reload_Bullet_Type_01());
+        }
+    }
+
+    public void setDelay_Change_Bullet(int delay_change_bullet) {
+        this.delay_change_bullet = delay_change_bullet;
+    }
+    public void setReload_Bullet(int reload_bullet) {
+        this.reload_bullet = reload_bullet;
+    }
+    public int getReload_Bullet() {
+        return reload_bullet;
     }
 
     public void getItem(Item item) {
@@ -36,17 +50,29 @@ public class Player extends Object {
                 break;
             case 5:
                 setType_Bullet(1);
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_01());
+                setDelay_Change_Bullet(database.getDelay_Change_Bullet());
                 break;
             case 6:
                 setType_Bullet(2);
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_02());
+                setDelay_Change_Bullet(database.getDelay_Change_Bullet());
                 break;
             case 7:
                 setType_Bullet(3);
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_03());
+                setDelay_Change_Bullet(database.getDelay_Change_Bullet());
                 break;
             case 8:
                 setType_Bullet(4);
+                setReload_Bullet(database.getPlayer_Reload_Bullet_Type_04());
+                setDelay_Change_Bullet(database.getDelay_Change_Bullet());
                 break;
         }
+    }
+
+    public int getDelay_Change_Bullet() {
+        return delay_change_bullet;
     }
 
     @Override

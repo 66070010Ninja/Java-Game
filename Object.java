@@ -24,6 +24,13 @@ public abstract class Object {
 
     public void draw(Graphics2D g2D, Color color) {
 
+        if (getGolden_Time() > 0 && this instanceof Player && get_HP() > 0) {
+            setImage(database.getPlayer_Get_Damage_Image());
+        }
+        else if (this instanceof Player && getGolden_Time() == 0 && get_HP() > 0) {
+            setImage(database.getPlayer_Image());
+        }
+
         g2D.drawImage(getImage(), (int)getX(), (int)getY(), null);
 
         if ((this instanceof Enemy_01 || this instanceof Enemy_02 || this instanceof Enemy_03 || this instanceof Enemy_04 || this instanceof Enemy_05) && get_HP() > 0) {
@@ -33,6 +40,7 @@ public abstract class Object {
         else if (this instanceof Player) {
             int count = 5;
             int count_hp = get_HP()/20;
+            Player player = (Player)this;
             for (int i = 0; i < count; i++) {
                 if (count_hp > 0) {
                     g2D.drawImage(getHP_Image(), 5 + i*getHP_Image().getWidth(null), 5, null);
@@ -43,23 +51,39 @@ public abstract class Object {
                 count_hp --;
             }
             g2D.setFont(new Font("Times", Font.PLAIN, (int)getHP_Image().getHeight(null)/2));
-            g2D.drawString("Enemy Left : " + getEnemy_Left(), 1600, 50);
+            g2D.drawString("Enemy Left : " + getEnemy_Left(), (int)database.getScreen().getWidth()-350, 50);
 
             if (get_HP() <= 0) {
                 g2D.drawString("Game Over", (int)database.getScreen().getWidth()/2, (int)database.getScreen().getHeight()/2);
             }
 
-            if (getType_Bullet() == 1) {
-                g2D.drawImage(database.getIcon_Bullet_Type_01() , 20, 960, 100, 100, null);
+            if (getType_Bullet() == 1 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_01() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
             }
-            else if (getType_Bullet() == 2) {
-                g2D.drawImage(database.getIcon_Bullet_Type_02(), 20, 960, 100, 100, null);
+            else if (getType_Bullet() == 2 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_02(), -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
             }
-            else if (getType_Bullet() == 3) {
-                g2D.drawImage(database.getIcon_Bullet_Type_03(), 20, 960, 100, 100, null);
+            else if (getType_Bullet() == 3 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_03(), -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
             }
-            else if (getType_Bullet() == 4) {
-                g2D.drawImage(database.getIcon_Bullet_Type_04(), 20, 960, 100, 100, null);
+            else if (getType_Bullet() == 4 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_04(), -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+            }
+            else if (getType_Bullet() == 1 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_01_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+            else if (getType_Bullet() == 2 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_02_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+            else if (getType_Bullet() == 3 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_03_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+            else if (getType_Bullet() == 4 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_04_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
             }
          }
 
@@ -202,16 +226,13 @@ public abstract class Object {
     }
 
     public void getDamage(int damage) {
-        if (getGolden_Time() > 0 && this instanceof Player) {}
-        else if (getGolden_Time() == 0 && this instanceof Player) {
+        if (getGolden_Time() == 0 && this instanceof Player) {
             setHP(get_HP() - damage);
             setGolden_Time(database.getCount_Dead());
         }
-        else {
-            setHP(get_HP() - damage);
-        }
 
         if (this instanceof Player != true) {
+            setHP(get_HP() - damage);
             setHP_Image();
         }
     }
