@@ -31,15 +31,16 @@ public class Windows extends JFrame {
                         } else if ((m_x >= (775) && m_x <= (775) + datamenu.getWidthExit())&&(m_y >= 800 && m_y <= 800 + datamenu.getHeightExit())){
                             System.exit(1);
                         }
-                    }  else if (DataBase_Menu.State == DataBase_Menu.STATE.MODE){
+                    }
+                    else if (DataBase_Menu.State == DataBase_Menu.STATE.MODE){
                         if ((m_x >= (450) && m_x <= (450) + datamenu.getWidthMode())&&(m_y >= (100) && m_y <= (100) + datamenu.getHeightMode())){
                             remove(menu);
                             removeMouseListener(this);
                             rungame.start();
-                }   
-            }
-        }
-    });
+                        }
+                    }
+                }
+            });
         add(mdi);
         add(menu);
         add(rungame);
