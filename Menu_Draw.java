@@ -28,16 +28,23 @@ public class Menu_Draw extends JFrame{
         if (DataBase_Menu.button == 0){
             g.drawImage(img.getPlay(),720, 470, null);
             g.drawImage(img.getExit(), 775, 800, null);
+            // g.drawImage(img.getCredit(),1450, 510, null);
         }
         if (DataBase_Menu.button == 1){
             g.drawImage(img.getPlayHovered(),720, 470, null);
             g.drawImage(img.getExit(), 775, 800, null);
+            // g.drawImage(img.getCredit(),1450, 510, null);
         }
         if (DataBase_Menu.button == 2){
             g.drawImage(img.getPlay(), 720, 470, null);
             g.drawImage(img.getExitHovered(), 775, 800, null);
-
+            // g.drawImage(img.getCredit(),1450, 510, null);
         }
+        // if (DataBase_Menu.button == 3){
+        //     g.drawImage(img.getPlay(), 720, 470, null);
+        //     g.drawImage(img.getExit(), 775, 800, null);
+        //     g.drawImage(img.getCreditHovered(),1450, 510, null);
+        // }
     }
     //mode menu 
     public void drawModeMenu(){

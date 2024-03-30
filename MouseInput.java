@@ -20,6 +20,8 @@ public class MouseInput implements MouseMotionListener{
                 DataBase_Menu.button = 1;
             } else if ((m_x >= (775) && m_x <= (775) + menu.getWidthExit())&&(m_y >= 800 && m_y <= 800 + menu.getHeightExit())){
                 DataBase_Menu.button = 2;
+            // } else if ((m_x >= (1450) && m_x <= (1450) + menu.getWidthCredit())&&(m_y >= 510 && m_y <= 510 + menu.getHeightCredit())){
+            //     DataBase_Menu.button = 3;
             } else {
                 DataBase_Menu.button = 0;
             }

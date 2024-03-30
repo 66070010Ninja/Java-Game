@@ -1,4 +1,3 @@
-
 //menu by pure
 
 import java.awt.*;
