@@ -10,6 +10,12 @@ public class DataBase {
     private final int target_time = (int)Math.pow(10, 9) / FPS;
     private final int count_dead = 100;
 
+    // Menu Pause
+    private final Image BG_Pause = new ImageIcon(getClass().getResource("/Img/Pause/Pause.png")).getImage();
+
+    // Victory
+    private final Image Victory_Image = new ImageIcon(getClass().getResource("/Img/Victory/Victory.png")).getImage();
+
     // Item
     private final Image Item_DM2 = new ImageIcon(getClass().getResource("/Img/Item/Icon-DM2.png")).getImage();
     private final Image Item_Explosion = new ImageIcon(getClass().getResource("/Img/Item/Icon-Explosion.png")).getImage();
@@ -45,15 +51,19 @@ public class DataBase {
     private int player_attack = 50;
 
     // Icon
-    private final Image icon_bullet_type_01 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/Main-UI1.png")).getImage();
-    private final Image icon_bullet_type_02 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/Rocket-UI1.png")).getImage();
-    private final Image icon_bullet_type_03 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/RP-UI1.png")).getImage();
-    private final Image icon_bullet_type_04 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/SP-UI1.png")).getImage();
-    private final Image Change_Type_Bullet_01 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/Main-UI-change.gif")).getImage();
-    private final Image Change_Type_Bullet_02 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/Rocket-UI-change.gif")).getImage();
-    private final Image Change_Type_Bullet_03 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/RP-UI-change.gif")).getImage();
-    private final Image Change_Type_Bullet_04 = new ImageIcon(getClass().getResource("/Img/Icon Type Bullet/SP-UI-change.gif")).getImage();
+    private final Image icon_bullet_type_01 = new ImageIcon(getClass().getResource("/Img/Icon/Main-UI1.png")).getImage();
+    private final Image icon_bullet_type_02 = new ImageIcon(getClass().getResource("/Img/Icon/Rocket-UI1.png")).getImage();
+    private final Image icon_bullet_type_03 = new ImageIcon(getClass().getResource("/Img/Icon/RP-UI1.png")).getImage();
+    private final Image icon_bullet_type_04 = new ImageIcon(getClass().getResource("/Img/Icon/SP-UI1.png")).getImage();
+    private final Image Change_Type_Bullet_01 = new ImageIcon(getClass().getResource("/Img/Icon/Main-UI-change.gif")).getImage();
+    private final Image Change_Type_Bullet_02 = new ImageIcon(getClass().getResource("/Img/Icon/Rocket-UI-change.gif")).getImage();
+    private final Image Change_Type_Bullet_03 = new ImageIcon(getClass().getResource("/Img/Icon/RP-UI-change.gif")).getImage();
+    private final Image Change_Type_Bullet_04 = new ImageIcon(getClass().getResource("/Img/Icon/SP-UI-change.gif")).getImage();
+    private final Image Icon_DM2_Image = new ImageIcon(getClass().getResource("/Img/Icon/Icon-DM2.gif")).getImage();
+    private final Image Icon_FR2_Image = new ImageIcon(getClass().getResource("/Img/Icon/Icon-FR2.gif")).getImage();
     private final int delay_change_bullet = 100;
+    private final int time_use_icon_DM2 = 1000;
+    private final int time_use_icon_FR2 = 1000;
 
     // Bullet
     private final Image bullet_player_Type_01_Image = new ImageIcon(getClass().getResource("/Img/Bullet/Bullet_Player_Type_01.png")).getImage();
@@ -73,7 +83,7 @@ public class DataBase {
     private final Image enemy_01_Image = new ImageIcon(getClass().getResource("/Img/Enemy/Enemy_01.gif")).getImage();
     private final int enemy_01_hp = 100;
     private final float enemy_01_speed = 3f;
-    private final int enemy_01_reload_bullet = 200;
+    private final int enemy_01_reload_bullet = 500;
     private final int enemy_01_attack = 20;
 
     // Enemy 02
@@ -144,6 +154,15 @@ public class DataBase {
     }
 
     // Image
+    public Image getIcon_DM2() {
+        return Icon_DM2_Image;
+    }
+    public Image getIcon_FR2() {
+        return Icon_FR2_Image;
+    }
+    public Image getVictory_Image() {
+        return Victory_Image;
+    }
     public Image getBG_Image() {
         return bg_Image;
     }
@@ -281,6 +300,12 @@ public class DataBase {
     public int getEnemy_05_HP() {
         return enemy_05_hp;
     }
+    public int getTime_Use_DM2() {
+        return time_use_icon_DM2;
+    }
+    public int getTime_Use_FR2() {
+        return time_use_icon_FR2;
+    }
 
     // Speed
     public float getPlayer_Speed() {
@@ -380,5 +405,10 @@ public class DataBase {
 
     public int get_Type_Bullet() {
         return type_bullet_player;
+    }
+
+    // UI
+    public Image getBG_Pause() {
+        return BG_Pause;
     }
 }

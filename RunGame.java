@@ -10,10 +10,12 @@ public class RunGame extends JPanel{
     private Thread thread;
 
     private BackGround bg;
+    private Pause_Menu pause;
     private CheckHitBox checkhitbox;
     private Player player;
     private List_Enemy enemis;
     private List_Item items;
+    private Victory victory;
 
     public RunGame() {
         image = new BufferedImage((int)database.getScreen().getWidth(), (int)database.getScreen().getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -27,10 +29,18 @@ public class RunGame extends JPanel{
             public void run() {
                 while (database.getStart()) {
                     long start_time = System.nanoTime();
-                    drawBackground();
-                    drawGame();
-                    update();
-                    render();
+
+                    if (player.getPause() == false) {
+                        drawBackground();
+                        drawGame();
+                        update();
+                        render();
+                    }
+                    else {
+                        drawPause();
+                        render();
+                    }
+
                     long time = System.nanoTime() - start_time;
                     if (time < database.getTarget_Time()) {
                         try {
@@ -55,6 +65,8 @@ public class RunGame extends JPanel{
         enemis = new List_Enemy();
         items = new List_Item(player, enemis);
         checkhitbox = new CheckHitBox(player, enemis, items);
+        victory = new Victory();
+        pause = new Pause_Menu();
     }
 
     public void initKeyboard() {
@@ -65,17 +77,25 @@ public class RunGame extends JPanel{
         bg.draw(g2D, null);
     }
     public void drawGame() {
-        player.draw(g2D, null);
-        enemis.draw(g2D, null);
-        items.draw(g2D, null);
+        if (player.getEnemy_Left() == 0) {
+            enemis.draw(g2D, null);
+            items.draw(g2D, null);
+            player.draw(g2D, null);
+            victory.draw(g2D, null);
+        }
+        else {
+            enemis.draw(g2D, null);
+            items.draw(g2D, null);
+            player.draw(g2D, null);
+        }
+    }
+
+    public void drawPause() {
+        pause.draw(g2D, null);
     }
 
     public void update() {
         checkhitbox.checkhitbox();
-        if (player.getEnemy_Left() <= 0) {
-            System.out.println("You Win !!!");
-            System.exit(0);
-        }
     }
 
     public void render() {

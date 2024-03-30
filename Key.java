@@ -15,17 +15,25 @@ public class Key {
         panel.requestFocus();
         panel.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_W) {
+                if (e.getKeyCode() == KeyEvent.VK_W && player.getEnemy_Left() != 0 && !player.getPause()) {
                     set_Key_Up(true);
                 }
-                if (e.getKeyCode() == KeyEvent.VK_S) {
+                if (e.getKeyCode() == KeyEvent.VK_S && player.getEnemy_Left() != 0 && !player.getPause()) {
                     set_Key_Down(true);
                 }
-                if (e.getKeyCode() == KeyEvent.VK_A) {
+                if (e.getKeyCode() == KeyEvent.VK_A && player.getEnemy_Left() != 0 && !player.getPause()) {
                     set_Key_Left(true);
                 }
-                if (e.getKeyCode() == KeyEvent.VK_D) {
+                if (e.getKeyCode() == KeyEvent.VK_D && player.getEnemy_Left() != 0 && !player.getPause()) {
                     set_Key_Right(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    if (player.getPause() == false) {
+                        player.setPause(true);
+                    }
+                    else {
+                        player.setPause(false);
+                    }
                 }
             }
             public void keyReleased(KeyEvent e) {
