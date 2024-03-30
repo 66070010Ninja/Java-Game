@@ -20,8 +20,16 @@ public abstract class Object {
     private int count_dead;
     private int count_golden_time = 0;
     private int enemy_left;
+    private int type_bullet;
 
     public void draw(Graphics2D g2D, Color color) {
+
+        if (getGolden_Time() > 0 && this instanceof Player && get_HP() > 0) {
+            setImage(database.getPlayer_Get_Damage_Image());
+        }
+        else if (this instanceof Player && getGolden_Time() == 0 && get_HP() > 0) {
+            setImage(database.getPlayer_Image());
+        }
 
         g2D.drawImage(getImage(), (int)getX(), (int)getY(), null);
 
@@ -29,10 +37,10 @@ public abstract class Object {
             g2D.drawImage(getMax_HP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
             g2D.drawImage(getHP_Image(), (int)getX(), (int)getY() + (int)getHeight() + 10, null);
         }
-
-        if (this instanceof Player) {
+        else if (this instanceof Player) {
             int count = 5;
             int count_hp = get_HP()/20;
+            Player player = (Player)this;
             for (int i = 0; i < count; i++) {
                 if (count_hp > 0) {
                     g2D.drawImage(getHP_Image(), 5 + i*getHP_Image().getWidth(null), 5, null);
@@ -43,12 +51,41 @@ public abstract class Object {
                 count_hp --;
             }
             g2D.setFont(new Font("Times", Font.PLAIN, (int)getHP_Image().getHeight(null)/2));
-            g2D.drawString("Enemy Left : " + getEnemy_Left(), 1600, 50);
+            g2D.drawString("Enemy Left : " + getEnemy_Left(), (int)database.getScreen().getWidth()-350, 50);
 
             if (get_HP() <= 0) {
                 g2D.drawString("Game Over", (int)database.getScreen().getWidth()/2, (int)database.getScreen().getHeight()/2);
             }
-        }
+
+            if (getType_Bullet() == 1 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_01() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+            }
+            else if (getType_Bullet() == 2 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_02(), -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+            }
+            else if (getType_Bullet() == 3 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_03(), -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+            }
+            else if (getType_Bullet() == 4 && player.getDelay_Change_Bullet() == 0) {
+                g2D.drawImage(database.getIcon_Bullet_Type_04(), -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+            }
+            else if (getType_Bullet() == 1 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_01_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+            else if (getType_Bullet() == 2 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_02_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+            else if (getType_Bullet() == 3 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_03_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+            else if (getType_Bullet() == 4 && player.getDelay_Change_Bullet() > 0) {
+                g2D.drawImage(database.getIcon_Change_04_Image() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
+                player.setDelay_Change_Bullet(player.getDelay_Change_Bullet() - 1);
+            }
+         }
 
         if (bullets != null) {
             bullets.draw(g2D, color);
@@ -61,6 +98,9 @@ public abstract class Object {
         }
     }
 
+    public void setType_Bullet(int type_bullet) {
+        this.type_bullet = type_bullet;
+    }
     public void setEnemy_Left(int enemy_left) {
         this.enemy_left = enemy_left;
     }
@@ -128,6 +168,9 @@ public abstract class Object {
         this.speed = speed;
     }
 
+    public int getType_Bullet() {
+        return type_bullet;
+    }
     public List_Bullet getList_Bullet() {
         return bullets;
     }
@@ -183,16 +226,13 @@ public abstract class Object {
     }
 
     public void getDamage(int damage) {
-        if (getGolden_Time() > 0 && this instanceof Player) {}
-        else if (getGolden_Time() == 0 && this instanceof Player) {
+        if (getGolden_Time() == 0 && this instanceof Player) {
             setHP(get_HP() - damage);
             setGolden_Time(database.getCount_Dead());
         }
-        else {
-            setHP(get_HP() - damage);
-        }
 
         if (this instanceof Player != true) {
+            setHP(get_HP() - damage);
             setHP_Image();
         }
     }

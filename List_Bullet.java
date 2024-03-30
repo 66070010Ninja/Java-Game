@@ -32,9 +32,25 @@ public class List_Bullet {
         thread = new Thread(new Runnable() {
             public void run() {
                 while (database.getStart()) {
-                    if (database.getPlayer_Reload_Bullet() <= count_reload_bullet && player != null && !player.getImage().equals(database.getNull_Image())) {
-                        bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 0));
-                        count_reload_bullet = 0;
+                    if (player != null && !player.getImage().equals(database.getNull_Image())) {
+                        if (player.getType_Bullet() == 1 && player.getReload_Bullet() <= count_reload_bullet) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 0));
+                            count_reload_bullet = 0;
+                        }
+                        else if (player.getType_Bullet() == 2 && player.getReload_Bullet() <= count_reload_bullet) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 1));
+                            count_reload_bullet = 0;
+                        }
+                        else if (player.getType_Bullet() == 3 && player.getReload_Bullet() <= count_reload_bullet) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 2));
+                            count_reload_bullet = 0;
+                        }
+                        else if (player.getType_Bullet() == 4 && player.getReload_Bullet() <= count_reload_bullet) {
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 3));
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 4));
+                            bullets.add(new Bullet(player.getX()+player.getWidth()-25, player.getY()+25, player, 5));
+                            count_reload_bullet = 0;
+                        }
                     }
                     else if (database.getEnemy_01_Reload_Bullet() <= count_reload_bullet && enemy_01 != null && object.getImage() != database.getNull_Image() && object.getImage() != database.getDead_Image()) {
                         bullets.add(new Bullet(enemy_01.getX()+10, enemy_01.getY()+45, enemy_01, 0));
@@ -69,8 +85,8 @@ public class List_Bullet {
                         bullets.add(new Bullet(enemy_05.getX()+30, enemy_05.getY() + enemy_05.getHeight(), enemy_05, 0));
                         count_reload_bullet = 0;
                     }
-                    count_reload_bullet++;
                     try {
+                        count_reload_bullet++;
                         Thread.sleep(5);
                     }
                     catch (InterruptedException ie) {
