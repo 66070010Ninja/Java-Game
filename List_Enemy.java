@@ -9,7 +9,7 @@ public class List_Enemy {
     private int time = 5000;
     private int round = 1;
 
-    public List_Enemy() {
+    public List_Enemy1() {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -41,7 +41,109 @@ public class List_Enemy {
         });
         thread.start();
     }
-
+    public List_Enemy2() {
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (database.getStart()) {
+                    if (round <= 5) {
+                        Random random = new Random();
+                        int x = random.nextInt(1, 3);
+                        if (x == 1) {
+                            Wave_02();
+                        }
+                        else {
+                            Wave_03();
+                        }
+                    }
+                    else if (round <= 10) {
+                        Random random = new Random();
+                        int x = random.nextInt(1, 4);
+                        if (x == 1) {
+                            Wave_04();
+                        }
+                        else if (x == 2){
+                            Wave_05();
+                        }
+                        else if (x == 3){
+                            Wave_02();
+                        }
+                    }
+                    else if (round > 10) {
+                        Random random = new Random();
+                        int x = random.nextInt(1, 4);
+                        if (x == 1) {
+                            Wave_04();
+                        }
+                        else if (x == 2){
+                            Wave_05();
+                        }
+                        else if (x == 3){
+                            Wave_06();
+                        }
+                    }
+                    try {
+                        Thread.sleep(time);
+                    }
+                    catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+    public List_Enemy3() {
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (database.getStart()) {
+                    if (round <= 10) {
+                        Random random = new Random();
+                        int x = random.nextInt(1, 5);
+                        if (x == 1) {
+                            Wave_04();
+                        }
+                        else if (x == 2){
+                            Wave_05();
+                        }
+                        else if (x == 3){
+                            Wave_06();
+                        }
+                        else if (x == 4){
+                            Wave_03();
+                        }
+                    }
+                    else if (round > 10) {
+                        Random random = new Random();
+                        int x = random.nextInt(1, 6);
+                        if (x == 1) {
+                            Wave_07();
+                        }
+                        else if (x == 2){
+                            Wave_08();
+                        }
+                        else if (x == 3){
+                            Wave_09();
+                        }
+                        else if (x == 4){
+                            Wave_10();
+                        }
+                        else if (x == 5){
+                            Wave_11();
+                        }
+                    }
+                    try {
+                        Thread.sleep(time);
+                    }
+                    catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
     public void Wave_01() {
         Random random = new Random();
         int y;
