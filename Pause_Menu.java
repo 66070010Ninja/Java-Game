@@ -1,7 +1,9 @@
+import java.awt.Graphics;
 
 public class Pause_Menu extends Object {
 
     private DataBase database = new DataBase();
+    private DataBase_Menu img = new DataBase_Menu();
 
     public Pause_Menu() {
         setImage(database.getBG_Pause());

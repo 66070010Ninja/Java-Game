@@ -12,13 +12,8 @@ public class Menu extends JPanel implements ActionListener {
     private DataBase database = new DataBase();
     //menu
     private Menu_Draw ddraw;
+    private Level_Menu_Draw lvdraw;
     // private DataBase_Menu data = new DataBase_Menu();
-    public static enum STATE{
-        START,
-        MENU,
-        MODE,
-        LEVEL
-    };
 
     //ตัวกำหนดเมนู
 
@@ -28,13 +23,18 @@ public class Menu extends JPanel implements ActionListener {
         setOpaque(false);
         setFocusable(true);
         ddraw = new Menu_Draw();
+        lvdraw = new Level_Menu_Draw();
         // data = new DataBase_Menu();
         setSize((int)database.getScreen().getWidth(), (int)database.getScreen().getHeight());
     }
 
     // Paint
     public void paint(Graphics g) {
-        ddraw.draw(g);
+        if ((DataBase_Menu.State == DataBase_Menu.STATE.MENU) || (DataBase_Menu.State == DataBase_Menu.STATE.MODE)){
+            ddraw.draw(g);
+        } else if (DataBase_Menu.State == DataBase_Menu.STATE.LEVEL_SELECT1){
+            lvdraw.draw(g);
+        }
     }
 
     // repaint

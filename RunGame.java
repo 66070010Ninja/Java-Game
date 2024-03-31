@@ -17,6 +17,10 @@ public class RunGame extends JPanel{
     private List_Item items;
     private Victory victory;
 
+    //
+    private Menu_Draw menu = new Menu_Draw();
+    //
+
     public RunGame() {
         image = new BufferedImage((int)database.getScreen().getWidth(), (int)database.getScreen().getHeight(), BufferedImage.TYPE_INT_ARGB);
         g2D = image.createGraphics();
@@ -37,6 +41,7 @@ public class RunGame extends JPanel{
                         render();
                     }
                     else {
+                        DataBase_Menu.State = DataBase_Menu.STATE.PAUSE;
                         drawPause();
                         render();
                     }
@@ -91,7 +96,9 @@ public class RunGame extends JPanel{
     }
 
     public void drawPause() {
+        //menu.draw(g2D);
         pause.draw(g2D, null);
+        menu.draw(g2D);
     }
 
     public void update() {
