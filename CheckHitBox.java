@@ -7,12 +7,15 @@ public class CheckHitBox {
     private List_Enemy enemis;
     private List_Bullet bullets;
     private List_Item items;
+    private BackGround background;
     private Area area;
+    private Sound sound = new Sound();
 
-    public CheckHitBox(Player player, List_Enemy enemis, List_Item items) {
+    public CheckHitBox(Player player, List_Enemy enemis, List_Item items, BackGround background) {
         this.player = player;
         this.enemis = enemis;
         this.items = items;
+        this.background = background;
     }
 
     public void checkhitbox() {
@@ -41,6 +44,9 @@ public class CheckHitBox {
         if (player.getGolden_Time() != 0) {
             player.setGolden_Time(player.getGolden_Time() - 1);
         }
+        if (player.getTime_Use_Explosion() != 0) {
+            player.setTime_Use_Explosion(player.getTime_Use_Explosion() - 1);
+        }
     }
 
     public void checkhitbox(Object enemy) {
@@ -51,26 +57,17 @@ public class CheckHitBox {
                 area = new Area(bullet.getShape());
                 area.intersect(enemy.getShape());
                 if (!area.isEmpty() && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image()) && player.getEnemy_Left() != 0) {
-                    if (bullet.getType_Bullet() == 1 || bullet.getType_Bullet() == 3 || bullet.getType_Bullet() == 4) {
-                        if (player.getUse_DM2()) {
-                            enemy.getDamage(bullet.getAttack_to_HP()*2);
-                        }
-                        else {
-                            enemy.getDamage(bullet.getAttack_to_HP());
-                        }
-                        bullets.getBullets().remove(bullet);
+                    if (player.getUse_DM2()) {
+                        enemy.getDamage(bullet.getAttack_to_HP()*2);
                     }
-                    else if (bullet.getType_Bullet() == 2 && player.getEnemy_Left() != 0) {
-                        if (player.getUse_DM2()) {
-                            enemy.getDamage(bullet.getAttack_to_HP()*2);
-                        }
-                        else {
-                            enemy.getDamage(bullet.getAttack_to_HP());
-                        }
+                    else {
+                        enemy.getDamage(bullet.getAttack_to_HP());
                     }
+                    bullets.getBullets().remove(bullet);
                 }
                 if (enemy.get_HP() <= 0 && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image())) {
                     enemy.setImage(database.getDead_Image());
+                    sound.Sound_Enemy_Boom();
                     player.setEnemy_Left(player.getEnemy_Left() -1);
                 }
                 if (player.get_HP() <= 0) {
@@ -92,12 +89,23 @@ public class CheckHitBox {
                 }
             }
 
+            area = new Area(enemy.getShape());
+            area.intersect(background.getShape());
+            if (area.isEmpty() && player.getTime_Use_Explosion() != 0 && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image())) {
+                enemy.setImage(database.getDead_Image());
+                enemy.setHP(0);
+                sound.Sound_Enemy_Boom();
+                player.setEnemy_Left(player.getEnemy_Left() -1);
+            }
+
             area = new Area(player.getShape());
             area.intersect(enemy.getShape());
             if (!area.isEmpty() && !enemy.getImage().equals(database.getDead_Image()) && !enemy.getImage().equals(database.getNull_Image()) && player.getGolden_Time() == 0 && !player.getImage().equals(database.getNull_Image()) && player.getEnemy_Left() != 0) {
                 enemy.setImage(database.getDead_Image());
                 enemy.setHP(0);
                 player.getDamage(enemy.getAttack_to_HP());
+                sound.Sound_get_Damage();
+                sound.Sound_Enemy_Boom();
                 player.setEnemy_Left(player.getEnemy_Left() -1);
             }
         }
@@ -110,9 +118,11 @@ public class CheckHitBox {
                 area.intersect(player.getShape());
                 if (!area.isEmpty() && enemy instanceof Enemy_04) {
                     player.getDamage(bullet.getAttack_to_HP());
+                    sound.Sound_get_Damage();
                 }
                 else if (!area.isEmpty() && player.getGolden_Time() == 0 && player.getEnemy_Left() != 0) {
                     player.getDamage(bullet.getAttack_to_HP());
+                    sound.Sound_get_Damage();
                     bullets.getBullets().remove(bullet);
                 }
             }
@@ -125,6 +135,7 @@ public class CheckHitBox {
             if (!area.isEmpty() && player.getEnemy_Left() != 0) {
                 items.getItems().remove(item);
                 player.getItem(item);
+                sound.Sound_Get_Item();
             }
         }
     }

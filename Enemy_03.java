@@ -17,7 +17,7 @@ public class Enemy_03 extends Object implements Check {
     }
 
     public boolean check() {
-        if (getX() < -(int)getWidth() || getX() > (int)database.getScreen().getWidth()) {
+        if (getX() < -(int)getWidth()) {
             return false;
         }
         else {

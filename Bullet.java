@@ -13,28 +13,28 @@ public class Bullet extends Object {
             setImage(database.getBullet_Player_Type_01_Image());
             setArea();
             setSpeed(database.getBullet_Player_Speed_Type_01());
-            setAttack(database.get_Player_Attack());
+            setAttack(database.get_Attack_Player_Bullet_Type_01());
             setType_Bullet(1);
         }
         else if (object instanceof Player && type_bullet == 1) {
             setImage(database.getBullet_Player_Type_02_Image());
             setArea();
             setSpeed(database.getBullet_Player_Speed_Type_02());
-            setAttack(database.get_Player_Attack());
+            setAttack(database.get_Attack_Player_Bullet_Type_02());
             setType_Bullet(2);
         }
         else if (object instanceof Player && type_bullet == 2) {
             setImage(database.getBullet_Player_Type_03_Image());
             setArea();
             setSpeed(database.getBullet_Player_Speed_Type_03());
-            setAttack(database.get_Player_Attack());
+            setAttack(database.get_Attack_Player_Bullet_Type_03());
             setType_Bullet(3);
         }
         else if (object instanceof Player && type_bullet == 3 || type_bullet == 4 || type_bullet == 5) {
             setImage(database.getBullet_Player_Type_04_Image());
             setArea();
             setSpeed(database.getBullet_Player_Speed_Type_04());
-            setAttack(database.get_Player_Attack());
+            setAttack(database.get_Attack_Player_Bullet_Type_04());
             setType_Bullet(4);
         }
         else if (object instanceof Enemy_01) {
