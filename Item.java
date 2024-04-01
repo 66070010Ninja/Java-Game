@@ -9,7 +9,29 @@ public class Item extends Object {
 
     public Item(Object object) {
         random = new Random();
-        type_item = random.nextInt(1, 9);;
+
+        // Define item weights (adjust values as needed)
+        int[] itemWeights = {10, 1, 10, 17, 20, 10, 10, 5}; // Example weights
+
+        int totalWeight = 0;
+        for (int weight : itemWeights) {
+             totalWeight += weight;
+            }
+
+        // Generate random number within total weight range (inclusive)
+        int randomValue = random.nextInt(totalWeight) + 1;
+
+        int currentWeight = 0;
+        int selectedType = 0;
+        for (int i = 0; i < itemWeights.length; i++) {
+            currentWeight += itemWeights[i];
+            if (randomValue <= currentWeight) {
+                selectedType = i + 1;
+                break;
+                }
+            }
+
+        type_item = selectedType;;
         if (type_item == 1) {
             setImage(database.getItem_DM2_Image());
         }
