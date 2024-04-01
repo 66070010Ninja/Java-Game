@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.util.*;
 
@@ -6,29 +5,108 @@ public class List_Enemy {
     private DataBase database = new DataBase();
     private Thread thread;
     private ArrayList<Object> enemis = new ArrayList<Object>();
-    private int time = 5000;
+    private int time = 6000;
     private int round = 1;
 
-    public List_Enemy1() {
+    public List_Enemy(Level_Game<Integer> level) {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (database.getStart()) {
-                    if (round <= 5) {
-                        Wave_01();
-                    }
-                    else if (round <= 10) {
-                        Wave_02();
-                    }
-                    else if (round > 10) {
-                        Random random = new Random();
-                        int x = random.nextInt(1, 3);
-                        if (x == 1) {
-                            Wave_02();
-                        }
-                        else {
-                            Wave_03();
-                        }
+                    switch (level.getlevel_game()) {
+                        case (1):
+                            if (round <= 5) {
+                                Wave_01();
+                            }
+                            else if (round <= 10) {
+                                Wave_02();
+                            }
+                            else if (round > 10) {
+                                Random random = new Random();
+                                int x = random.nextInt(1, 3);
+                                if (x == 1) {
+                                    Wave_02();
+                                }
+                                else {
+                                    Wave_03();
+                                }
+                            }
+                            break;
+                        case (2):
+                            if (round <= 5) {
+                                Random random = new Random();
+                                int x = random.nextInt(1, 3);
+                                if (x == 1) {
+                                    Wave_02();
+                                }
+                                else {
+                                    Wave_03();
+                                }
+                            }
+                            else if (round <= 10) {
+                                Random random = new Random();
+                                int x = random.nextInt(1, 4);
+                                if (x == 1) {
+                                    Wave_04();
+                                }
+                                else if (x == 2){
+                                    Wave_05();
+                                }
+                                else if (x == 3){
+                                    Wave_02();
+                                }
+                            }
+                            else if (round > 10) {
+                                Random random = new Random();
+                                int x = random.nextInt(1, 4);
+                                if (x == 1) {
+                                    Wave_04();
+                                }
+                                else if (x == 2){
+                                    Wave_05();
+                                }
+                                else if (x == 3){
+                                    Wave_06();
+                                }
+                            }
+                            break;
+                        case (3):
+                            if (round <= 10) {
+                                Random random = new Random();
+                                int x = random.nextInt(1, 5);
+                                if (x == 1) {
+                                    Wave_04();
+                                }
+                                else if (x == 2){
+                                    Wave_05();
+                                }
+                                else if (x == 3){
+                                    Wave_06();
+                                }
+                                else if (x == 4){
+                                    Wave_03();
+                                }
+                            }
+                            else if (round > 10) {
+                                Random random = new Random();
+                                int x = random.nextInt(1, 6);
+                                if (x == 1) {
+                                    Wave_07();
+                                }
+                                else if (x == 2){
+                                    Wave_08();
+                                }
+                                else if (x == 3){
+                                    Wave_09();
+                                }
+                                else if (x == 4){
+                                    Wave_10();
+                                }
+                                else if (x == 5){
+                                    Wave_11();
+                                }
+                            }
+                            break;
                     }
                     try {
                         Thread.sleep(time);
@@ -41,109 +119,7 @@ public class List_Enemy {
         });
         thread.start();
     }
-    public List_Enemy2() {
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (database.getStart()) {
-                    if (round <= 5) {
-                        Random random = new Random();
-                        int x = random.nextInt(1, 3);
-                        if (x == 1) {
-                            Wave_02();
-                        }
-                        else {
-                            Wave_03();
-                        }
-                    }
-                    else if (round <= 10) {
-                        Random random = new Random();
-                        int x = random.nextInt(1, 4);
-                        if (x == 1) {
-                            Wave_04();
-                        }
-                        else if (x == 2){
-                            Wave_05();
-                        }
-                        else if (x == 3){
-                            Wave_02();
-                        }
-                    }
-                    else if (round > 10) {
-                        Random random = new Random();
-                        int x = random.nextInt(1, 4);
-                        if (x == 1) {
-                            Wave_04();
-                        }
-                        else if (x == 2){
-                            Wave_05();
-                        }
-                        else if (x == 3){
-                            Wave_06();
-                        }
-                    }
-                    try {
-                        Thread.sleep(time);
-                    }
-                    catch (InterruptedException ie) {
-                        ie.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
-    }
-    public List_Enemy3() {
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (database.getStart()) {
-                    if (round <= 10) {
-                        Random random = new Random();
-                        int x = random.nextInt(1, 5);
-                        if (x == 1) {
-                            Wave_04();
-                        }
-                        else if (x == 2){
-                            Wave_05();
-                        }
-                        else if (x == 3){
-                            Wave_06();
-                        }
-                        else if (x == 4){
-                            Wave_03();
-                        }
-                    }
-                    else if (round > 10) {
-                        Random random = new Random();
-                        int x = random.nextInt(1, 6);
-                        if (x == 1) {
-                            Wave_07();
-                        }
-                        else if (x == 2){
-                            Wave_08();
-                        }
-                        else if (x == 3){
-                            Wave_09();
-                        }
-                        else if (x == 4){
-                            Wave_10();
-                        }
-                        else if (x == 5){
-                            Wave_11();
-                        }
-                    }
-                    try {
-                        Thread.sleep(time);
-                    }
-                    catch (InterruptedException ie) {
-                        ie.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
-    }
+
     public void Wave_01() {
         Random random = new Random();
         int y;
@@ -154,26 +130,6 @@ public class List_Enemy {
             enemy_01.changeLocation((int)database.getScreen().getWidth() + i*(int)database.getEnemy_01_Image().getHeight(null) + 50, y);
             enemis.add(enemy_01);
         }
-
-        // Enemy_02 enemy_02 = new Enemy_02();
-        // y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_02.getHeight());
-        // enemy_02.changeLocation((int)database.getScreen().getWidth(), y);
-        // enemis.add(enemy_02);
-
-        // Enemy_03 enemy_03 = new Enemy_03();
-        // y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_03.getHeight());
-        // enemy_03.changeLocation((int)database.getScreen().getWidth(), y);
-        // enemis.add(enemy_03);
-
-        // Enemy_04 enemy_04 = new Enemy_04();
-        // y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_04.getHeight());
-        // enemy_04.changeLocation((int)database.getScreen().getWidth(), y);
-        // enemis.add(enemy_04);
-
-        // Enemy_05 enemy_05 = new Enemy_05();
-        // enemy_05.changeLocation((int)database.getScreen().getWidth(), 0);
-        // enemis.add(enemy_05);
-
         round++;
     }
 
@@ -244,11 +200,6 @@ public class List_Enemy {
                     enemis.add(enemy_02);
                     break;
                 case 2:
-                    // Enemy_03 enemy_03 = new Enemy_03();
-                    // y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_03.getHeight());
-                    // enemy_03.changeLocation((int)database.getScreen().getWidth() + i*(int)database.getEnemy_02_Image().getHeight(null) + 50 , y);
-                    // enemis.add(enemy_03);
-                    // break;
                     Enemy_03 enemy_03 = new Enemy_03();
                     y = random.nextInt((int)database.getScreen().getHeight() - (int)enemy_03.getHeight());
                     enemy_03.changeLocation((int)database.getScreen().getWidth(), y);

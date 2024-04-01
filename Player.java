@@ -9,6 +9,7 @@ public class Player extends Object {
     private boolean use_DM2 = false;
     private boolean use_FR2 = false;
     private boolean pause = false;
+    private int time_use_explosion;
 
     public Player () {
         setImage(database.getPlayer_Image());
@@ -24,6 +25,13 @@ public class Player extends Object {
         if (getType_Bullet() == 1) {
             setReload_Bullet(database.getPlayer_Reload_Bullet_Type_01());
         }
+    }
+
+    public void setTime_Use_Explosion(int time_use_explosion) {
+        this.time_use_explosion = time_use_explosion;
+    }
+    public int getTime_Use_Explosion() {
+        return time_use_explosion;
     }
 
     public void setPause(boolean pause) {
@@ -95,6 +103,7 @@ public class Player extends Object {
                 setTime_Use_Icon_DM2(database.getTime_Use_DM2());
                 break;
             case 2:
+                setTime_Use_Explosion(database.getTime_Use_Explosion());
                 break;
             case 3:
                 setTime_Use_Icon_FR2(database.getTime_Use_FR2());

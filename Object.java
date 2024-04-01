@@ -58,10 +58,6 @@ public abstract class Object {
             g2D.setFont(new Font("Times", Font.PLAIN, (int)getHP_Image().getHeight(null)/2));
             g2D.drawString("Enemy Left : " + getEnemy_Left(), (int)database.getScreen().getWidth()-350, 50);
 
-            if (get_HP() <= 0) {
-                g2D.drawString("Game Over", (int)database.getScreen().getWidth()/2, (int)database.getScreen().getHeight()/2);
-            }
-
             if (getType_Bullet() == 1 && player.getDelay_Change_Bullet() == 0) {
                 g2D.drawImage(database.getIcon_Bullet_Type_01() , -3, (int)database.getScreen().getHeight()-95, 100, 100, null);
             }
